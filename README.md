@@ -103,9 +103,7 @@ This document describes two complementary methods to identify singly occupied mo
 - **Orbital projection analysis**, where occupied α orbitals are projected onto the β orbital basis using the AO overlap matrix;
 - **Cosine similarity mapping**, which computes the angular similarity between α and β orbitals and matches them using the Kuhn–Munkres (Hungarian) algorithm.
 
-An example based on the triplet state (T₁) of formaldehyde (H₂CO) is included.
-
-📄 [projection-v2.pdf](doc-latex/projection-v2.pdf)
+An example based on the triplet state (T₁) of formaldehyde (H₂CO) is included in the doc/ folder
 
 <hr style="height:3px; background-color:#00aaaa; border:none;" />
 
