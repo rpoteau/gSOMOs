@@ -10,6 +10,9 @@ SOMOs documentation
    :align: center
    :width: 1000px
 
+Download the scientific documentation here:
+:download:`projection-v2.pdf <_static/projection-v2.pdf>`
+
 .. automodule:: somos.io
    :members:
    :undoc-members:

@@ -2,15 +2,31 @@
 
 All notable changes to this gSOMOs project will be documented here.
 
+## [0.2.3] - 2024-04-25
+### Fixed
+- content of docs/build/html/ is now copied in docs/
+
+## [0.2.2] - 2024-04-25
+### Added
+- new [github repository](https://github.com/rpoteau/gSOMOs/)
+- new link toward the documentation in pyproject.toml
+- link toward doc-latex/projection-v2.pdf removed in README.md
+
+---
+
 ## [0.2.1] - 2024-04-24
 ### Fixed
 - added again `*.pdf` in `.gitignore`
 - added `doc-latex/*.pdf` in `.gitignore`
 - added MANIFEST.in
 
+---
+
 ## [0.2.0] - 2024-04-24
 ### Fixed
 - removed `*.pdf` in `.gitignore`
+
+---
 
 ## [0.1.9] - 2024-04-24
 ### Added
