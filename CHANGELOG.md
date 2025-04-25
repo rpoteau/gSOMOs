@@ -2,6 +2,14 @@
 
 All notable changes to this gSOMOs project will be documented here.
 
+## [0.2.4] - 2024-04-25
+### Added
+- svg files available again on github
+### Changed
+- docs/build/html/ now in sphinx_rtd_theme
+
+--- 
+
 ## [0.2.3] - 2024-04-25
 ### Fixed
 - content of docs/build/html/ is now copied in docs/
