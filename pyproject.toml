@@ -26,9 +26,16 @@ build-backend = "setuptools.build_meta"
 packages = ["somos"]
 
 [project.urls]
-Homepage = "https://github.com/rpoteau/gSOMOs"
-Documentation = "https://rpoteau.github.io/gSOMOs/"
+Documentation = "https://gsomos.readthedocs.io/"
 
 Repository = "https://github.com/rpoteau/gSOMOs"
 Changelog = "https://github.com/rpoteau/gSOMOs/blob/main/CHANGELOG.md"
+
+[project.optional-dependencies]
+docs = [
+  "sphinx",
+  "sphinx_rtd_theme",
+  "myst-parser",
+  "numpydoc"
+]
 
