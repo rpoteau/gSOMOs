@@ -31,16 +31,34 @@ def extract_gaussian_info(logfile_path):
     import gzip
     import shutil
     import tempfile
+    from tqdm import tqdm
     
     logfile_path = Path(logfile_path)
     is_gzipped = logfile_path.suffix == ".gz"
     temp_file_path = None
 
     if is_gzipped:
-        # Create a temporary text file with .log extension
+        print(f"Need to gunzip the log file")
         with tempfile.NamedTemporaryFile(mode="w", delete=False, suffix=".log", encoding="utf-8") as temp_file:
             with gzip.open(logfile_path, "rt", encoding="utf-8") as f_in:
-                shutil.copyfileobj(f_in, temp_file)
+                # Get the total uncompressed size if possible
+                total_size = 0
+                try:
+                    with gzip.open(logfile_path, "rb") as f_check:
+                        f_check.read()
+                        total_size = f_check.tell()
+                except Exception:
+                    pass  # ignore if we can't estimate
+    
+                # Now gunzip with a progress bar
+                chunk_size = 1024 * 1024  # 1 MB
+                with tqdm(total=total_size, unit="B", unit_scale=True, desc="Gunzip") as pbar:
+                    while True:
+                        chunk = f_in.read(chunk_size)
+                        if not chunk:
+                            break
+                        temp_file.write(chunk)
+                        pbar.update(len(chunk))
             temp_file_path = temp_file.name
         logfile_path = Path(temp_file_path)
 
@@ -53,7 +71,6 @@ def extract_gaussian_info(logfile_path):
     S2_val = None
     S_val = None
     multiplicity = None
-
     try:
         with open(logfile_path, "r") as f:
             lines = f.readlines()
@@ -64,6 +81,11 @@ def extract_gaussian_info(logfile_path):
                     S2_val = float(match.group(1))
                     S_val = float(match.group(2))
                     multiplicity = round(2 * S_val + 1, 1)
+                    print(f"Eigenvalue of S2 operator = {S2_val}") 
+                    print(f"S-value = {S_val}") 
+                    print(f"Spin multiplicity = {multiplicity}") 
+                    expected_nMag = 2 * S_val
+                    print(f"2×S = {expected_nMag:.2f} → expecting ~{round(expected_nMag)} magnetic orbitals (SOMOs)")
                 break
     except Exception:
         pass

@@ -2,6 +2,28 @@
 
 All notable changes to this gSOMOs project will be documented here.
 
+---
+
+## [0.2.6] - 2024-04-25
+### Added
+- progession bar in `io.extract_gaussian_info`
+- dependency on `tqdm` added in `pyproject.toml` and to `docs/source/SOMOs_imports_summary.md`
+- in `index.rst`, new calls to
+    - SOMOs_imports_summary.md
+    - SciDoc.md
+### Changed
+- sphinx documentation : link toward the scientific document now given in `SciDoc.md`
+
+---
+
+## [0.2.5] - 2024-04-25
+### Changed
+- documentation now available on [readthedocs](https://gsomos.readthedocs.io/)
+- `pyproject.toml` changed accordingly
+- `README.md` changed as well, with badges
+
+---
+
 ## [0.2.4] - 2024-04-25
 ### Added
 - svg files available again on github

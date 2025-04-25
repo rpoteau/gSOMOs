@@ -82,7 +82,7 @@ Don't forget to update the version number in `pyproject.toml`
 
 ---
 
-## 🧪 Upload to TestPyPI (sandbox)
+## 📤 Upload to TestPyPI (sandbox)
 
 ```bash
 twine upload --repository testpypi dist/*
@@ -96,7 +96,7 @@ pip install -i https://test.pypi.org/simple SOMOs
 
 ---
 
-## 🚀 Upload to real PyPI
+## 📤 Upload to real PyPI
 
 Once you're confident with TestPyPI:
 
@@ -125,6 +125,18 @@ Then in Python:
 
 ```python
 from somos import io, cosim, proj
+```
+
+---
+
+
+## 🚀 Fast process
+
+```bash
+rm -rf build dist SOMOs.egg-info
+python -m build
+twine upload dist/*
+pip install -e .    
 ```
 
 <hr style="height:3px; background-color:#00aaaa; border:none;" />

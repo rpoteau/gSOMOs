@@ -5,13 +5,11 @@
 
 SOMOs documentation
 ===================
+
 .. image:: _static/pyPCBanner.svg
    :alt: SOMOs banner
    :align: center
    :width: 1000px
-
-Download the scientific documentation here:
-:download:`projection-v2.pdf <_static/projection-v2.pdf>`
 
 .. automodule:: somos.io
    :members:
@@ -29,4 +27,5 @@ Download the scientific documentation here:
    :maxdepth: 2
    :caption: Contents:
 
-    
+   SOMOs_imports_summary.md
+   SciDoc.md

@@ -19,7 +19,8 @@
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="📚 Dependencies" href="SOMOs_imports_summary.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -41,34 +42,12 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">SOMOs documentation</a><ul>
-<li><a class="reference internal" href="#somos.io.extract_gaussian_info"><code class="docutils literal notranslate"><span class="pre">extract_gaussian_info()</span></code></a></li>
-<li><a class="reference internal" href="#somos.io.load_mos_from_cclib"><code class="docutils literal notranslate"><span class="pre">load_mos_from_cclib()</span></code></a></li>
-<li><a class="reference internal" href="#somos.cosim.analyzeSimilarity"><code class="docutils literal notranslate"><span class="pre">analyzeSimilarity()</span></code></a></li>
-<li><a class="reference internal" href="#somos.cosim.build_full_similarity_table"><code class="docutils literal notranslate"><span class="pre">build_full_similarity_table()</span></code></a></li>
-<li><a class="reference internal" href="#somos.cosim.cluster_orbitals"><code class="docutils literal notranslate"><span class="pre">cluster_orbitals()</span></code></a></li>
-<li><a class="reference internal" href="#somos.cosim.cosine_similarity_with_overlap"><code class="docutils literal notranslate"><span class="pre">cosine_similarity_with_overlap()</span></code></a></li>
-<li><a class="reference internal" href="#somos.cosim.cross_match_all"><code class="docutils literal notranslate"><span class="pre">cross_match_all()</span></code></a></li>
-<li><a class="reference internal" href="#somos.cosim.find_somo_candidates"><code class="docutils literal notranslate"><span class="pre">find_somo_candidates()</span></code></a></li>
-<li><a class="reference internal" href="#somos.cosim.heatmap_MOs"><code class="docutils literal notranslate"><span class="pre">heatmap_MOs()</span></code></a></li>
-<li><a class="reference internal" href="#somos.cosim.interactive_similarity"><code class="docutils literal notranslate"><span class="pre">interactive_similarity()</span></code></a></li>
-<li><a class="reference internal" href="#somos.cosim.save_similarity_per_somo_from_df"><code class="docutils literal notranslate"><span class="pre">save_similarity_per_somo_from_df()</span></code></a></li>
-<li><a class="reference internal" href="#somos.cosim.scalar_product_with_overlap"><code class="docutils literal notranslate"><span class="pre">scalar_product_with_overlap()</span></code></a></li>
-<li><a class="reference internal" href="#somos.cosim.tsne"><code class="docutils literal notranslate"><span class="pre">tsne()</span></code></a></li>
-<li><a class="reference internal" href="#somos.proj.compute_orbital_projections"><code class="docutils literal notranslate"><span class="pre">compute_orbital_projections()</span></code></a></li>
-<li><a class="reference internal" href="#somos.proj.compute_projection_matrix_and_eigenvalues"><code class="docutils literal notranslate"><span class="pre">compute_projection_matrix_and_eigenvalues()</span></code></a></li>
-<li><a class="reference internal" href="#somos.proj.identify_somos_from_projection"><code class="docutils literal notranslate"><span class="pre">identify_somos_from_projection()</span></code></a></li>
-<li><a class="reference internal" href="#somos.proj.parse_beta_contrib_string"><code class="docutils literal notranslate"><span class="pre">parse_beta_contrib_string()</span></code></a></li>
-<li><a class="reference internal" href="#somos.proj.print_eigen_analysis"><code class="docutils literal notranslate"><span class="pre">print_eigen_analysis()</span></code></a></li>
-<li><a class="reference internal" href="#somos.proj.project_occupied_alpha_onto_beta"><code class="docutils literal notranslate"><span class="pre">project_occupied_alpha_onto_beta()</span></code></a></li>
-<li><a class="reference internal" href="#somos.proj.projection_heatmap_from_df"><code class="docutils literal notranslate"><span class="pre">projection_heatmap_from_df()</span></code></a></li>
-<li><a class="reference internal" href="#somos.proj.show_alpha_to_homo"><code class="docutils literal notranslate"><span class="pre">show_alpha_to_homo()</span></code></a></li>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="SOMOs_imports_summary.html">📚 Dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SciDoc.html">📄 Scientific Documentation</a></li>
 </ul>
-</li>
-</ul>
-</div>
+
         </div>
       </div>
     </nav>
@@ -95,10 +74,8 @@
              
   <section id="somos-documentation">
 <h1>SOMOs documentation<a class="headerlink" href="#somos-documentation" title="Link to this heading"></a></h1>
-<a class="reference internal image-reference" href="_static/pyPCBanner.svg"><img alt="SOMOs banner" class="align-center" src="_static/pyPCBanner.svg" style="width: 1000px;" />
+<a class="reference internal image-reference" href="_images/pyPCBanner.svg"><img alt="SOMOs banner" class="align-center" src="_images/pyPCBanner.svg" style="width: 1000px;" />
 </a>
-<p>Download the scientific documentation here:
-<a class="reference download internal" download="" href="_downloads/f4fe0647be26c71637420b08a160fa20/projection-v2.pdf"><code class="xref download docutils literal notranslate"><span class="pre">projection-v2.pdf</span></code></a></p>
 <dl class="py function" id="module-somos.io">
 <dt class="sig sig-object py" id="somos.io.extract_gaussian_info">
 <span class="sig-prename descclassname"><span class="pre">somos.io.</span></span><span class="sig-name descname"><span class="pre">extract_gaussian_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logfile_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#somos.io.extract_gaussian_info" title="Link to this definition"></a></dt>
@@ -534,13 +511,20 @@ allant de l’α 1 jusqu’à la HOMO, avec surlignage facultatif des SOMOs.</p>
 </dd></dl>
 
 <div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="SOMOs_imports_summary.html">📚 Dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SciDoc.html">📄 Scientific Documentation</a></li>
+</ul>
 </div>
 </section>
 
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="SOMOs_imports_summary.html" class="btn btn-neutral float-right" title="📚 Dependencies" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

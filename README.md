@@ -2,17 +2,28 @@
 <img src="./somos/config/svg/pyPCBanner.svg" alt="SOMOs" width="1000"/>
 </div>
 
->   ## [0.2.4] - 2024-04-25
->   ### Added
->       - svg files available again on github
->   ### Changed
->   - docs/build/html/ now in sphinx_rtd_theme
+> Version [0.2.6] - 2024-04-25
+> **Added**
+> - progession bar in `io.extract_gaussian_info`
+> - dependency on `tqdm` added in `pyproject.toml` and to `docs/source/SOMOs_imports_summary.md`
+> - in `index.rst`, new calls to
+>     - SOMOs_imports_summary.md
+>     - SciDoc.md
+>  **Changed**
+> - sphinx documentation : link toward the scientific document now given in `SciDoc.md`
 
 # SOMOs
 
 🔗 Available on [PyPI](https://pypi.org/project/gSOMOs/)
 
 A Python library to identify and analyze Single Occupied Molecular Orbitals (SOMOs) from Gaussian 09 or Gaussian 16 `.log` files.
+
+[![PyPI version](https://img.shields.io/pypi/v/gSOMOs.svg?color=blue)](https://pypi.org/project/gSOMOs/)
+[![Documentation Status](https://readthedocs.org/projects/gsomos/badge/?version=latest)](https://gsomos.readthedocs.io/en/latest/?badge=latest)
+[![License](https://img.shields.io/github/license/rpoteau/gSOMOs)](https://github.com/rpoteau/gSOMOs/blob/main/LICENSE)
+[![Python](https://img.shields.io/badge/python-3.11+-brightgreen.svg)](https://www.python.org/downloads/)
+[![Build](https://img.shields.io/badge/build-manual-lightgrey)](https://github.com/rpoteau/gSOMOs)
+
 
 <hr style="height:3px; background-color:#00aaaa; border:none;" />
 

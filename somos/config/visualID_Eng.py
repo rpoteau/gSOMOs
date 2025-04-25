@@ -126,7 +126,7 @@ def init(pwy):
     md = '<p style="text-align: center"><img width="800px" src="' + path2svg + 'pyPCBanner.svg" style="margin-left:auto; margin-right:auto"/></p>'
     display_md(md)
     
-def end(pwy):
+def end():
     global _end_time
     _end_time = datetime.datetime.now()
     end_time = time.strftime("%A %d %B %Y, %H:%M:%S")
@@ -134,6 +134,7 @@ def end(pwy):
     md = f'**End at:** {end_time}  \n'
     md+= f'**Duration:** {duration}'
     display_md(md)
+    pwy = "./somos/config/"
     path2svg=pwy + 'svg/'
     md = '<p style="text-align: center"><img width="800px" src="' + path2svg + 'logoEnd.svg" style="margin-left:auto; margin-right:auto"/></p>'
     display_md(md)
