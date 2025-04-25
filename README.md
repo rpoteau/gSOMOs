@@ -2,11 +2,11 @@
 <img src="./somos/config/svg/pyPCBanner.svg" alt="SOMOs" width="1000"/>
 </div>
 
-> Version [0.2.2] - 2024-04-25
-> ### Added
->   - new [github repository](https://github.com/rpoteau/gSOMOs/)
->   - new link toward the documentation in pyproject.toml
->   - link toward doc-latex/projection-v2.pdf removed in README.md 
+> Version [0.2.3] - 2024-04-25
+
+> Fixed
+
+>   - content of docs/build/html/ is now copied in docs/
 
 # SOMOs
 

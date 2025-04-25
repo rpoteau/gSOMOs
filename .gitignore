@@ -31,7 +31,6 @@ Thumbs.db
 *.xlsx
 *.png
 !*-C.png
-*.svg
 *.pdf
 !doc-latex/*.pdf
 
