@@ -264,6 +264,16 @@ SOMOs
 \end_inset
 
  molecular orbitals obtained from unrestricted calculations.
+ SOMOs are expected to show strong projections onto the 
+\begin_inset Formula $\beta$
+\end_inset
+
+ virtual space and minimal overlap with the 
+\begin_inset Formula $\beta$
+\end_inset
+
+ occupied space —
+ a characteristic signature of magnetic (unpaired) molecular orbitals in open-shell systems.
  The projection scheme evaluates the squared overlap of each 
 \begin_inset Formula $\alpha$
 \end_inset
@@ -282,6 +292,22 @@ SOMOs
 \end_inset
 
  manifold.
+ It is completed by the standard projection of MOs on a reduced space,
+ namely the projection of 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ occupied MOs on two sub-spaces,
+ defined by 
+\begin_inset Formula $\beta$
+\end_inset
+
+-occupied MOs and 
+\begin_inset Formula $\beta$
+\end_inset
+
+-virtual MOs,
+ respectively.
  In contrast,
  the cosine similarity approach measures the angular similarity between 
 \begin_inset Formula $\alpha$
@@ -303,17 +329,7 @@ SOMOs
 \end_inset
 
  orbitals.
- Instead,
- they show strong projections onto the 
-\begin_inset Formula $\beta$
-\end_inset
-
- virtual space and minimal overlap with the 
-\begin_inset Formula $\beta$
-\end_inset
-
- occupied space —
- a characteristic signature of magnetic (unpaired) molecular orbitals in open-shell systems.
+ 
 \end_layout
 
 \begin_layout Section
@@ -1105,8 +1121,21 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+rowcolor{gray!20}
+\end_layout
+
+\end_inset
+
 
 \size small
+
 \begin_inset Formula $\boldsymbol{\alpha}$
 \end_inset
 
@@ -2652,10 +2681,22 @@ status open
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <row>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+rowcolor{gray!20}
+\end_layout
+
+\end_inset
+
 
 \family typewriter
 \series bold
@@ -2665,7 +2706,7 @@ SOMO Candidate #1
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3134,10 +3175,22 @@ status open
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <row>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+rowcolor{gray!20}
+\end_layout
+
+\end_inset
+
 
 \family typewriter
 \series bold
@@ -3147,7 +3200,7 @@ SOMO Candidate #1
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3317,6 +3370,18 @@ SOMO Candidate #2
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+rowcolor{gray!20}
+\end_layout
+
+\end_inset
+
 
 \family typewriter
 \series bold
