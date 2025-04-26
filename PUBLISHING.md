@@ -136,7 +136,7 @@ from somos import io, cosim, proj
 rm -rf build dist SOMOs.egg-info
 python -m build
 twine upload dist/*
-pip install -e .    
+pip install -e .
 ```
 
 <hr style="height:3px; background-color:#00aaaa; border:none;" />

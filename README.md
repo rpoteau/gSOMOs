@@ -2,14 +2,24 @@
 <img src="./somos/config/svg/pyPCBanner.svg" alt="SOMOs" width="1000"/>
 </div>
 
-> Version [0.9.0] - 2024-04-26
+> Version [0.9.1] - 2024-04-26
+>
 > **Changed**
+>
+> - gSOMOs-v3.pdf scientific document now downloadable in `gsomos.readthedocs.io`
+>
+> Version [0.9.0] - 2024-04-26
+> 
+> **Changed**
+> 
 > - logo is now gSOMOs instead of SOMOs
 > - in the projection scheme (`proj.py`), there are now two criteria to identify a SOMO, namely "SOMO P2v?" (formerly SOMO?) and "SOMO dom. β MO?" (see scientific documentation)
 >     - SOMOs identified according to the P^2_virtual criterion are highlighted in green
 >     - SOMOs identified only on the basis of a dominant virtual beta MO are highlighted in orange (weaker criterion)
 > - Scientific documentation renamed `gSOMOs.pdf`. And content updated
+> 
 > **Added**
+> 
 > - new analyzis scheme in `proj.py`: bases on the diagonalization of projection matrices
 > - new `clean_logfile_name()` function in `io.py` (made to solve a prefix issue for X.log.gz files)
 

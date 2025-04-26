@@ -4,6 +4,12 @@ All notable changes to this gSOMOs project will be documented here.
 
 ---
 
+## [0.9.1] - 2024-04-26
+### Changed
+- gSOMOs-v3.pdf scientific document now downloadable in `gsomos.readthedocs.io`
+
+---
+
 ## [0.9.0] - 2024-04-26
 ### Changed
 - logo is now gSOMOs instead of SOMOs
