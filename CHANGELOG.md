@@ -4,6 +4,12 @@ All notable changes to this gSOMOs project will be documented here.
 
 ---
 
+## [0.9.4] - 2024-04-26
+### Changed
+- Images in README.md now point to their `https://raw.githubusercontent.com` counterpart
+
+---
+
 ## [0.9.3] - 2024-04-26
 ### Fixed
 - Minor fixes

@@ -1,15 +1,23 @@
 <div style="text-align:center">
-<img src="./somos/config/svg/pyPCBanner.svg" alt="SOMOs" width="1000"/>
+<img src="https://raw.githubusercontent.com/rpoteau/gSOMOs/main/somos/config/svg/pyPCBanner.png" alt="SOMOs" width="1000"/>
 </div>
 
-> **Version [0.9.1] & [0.9.3] - 2024-04-26**
+> **Versions [0.9.0] - [0.9.4] - 2024-04-26**
 >
 > **Changed**
 >
+> - logo is now gSOMOs instead of SOMOs
+> - in the projection scheme (`proj.py`), there are now two criteria to identify a SOMO, namely "SOMO P2v?" (formerly SOMO?) and "SOMO dom. β MO?" (see scientific documentation)
+>     - SOMOs identified according to the P^2_virtual criterion are highlighted in green
+>     - SOMOs identified only on the basis of a dominant virtual beta MO are highlighted in orange (weaker criterion)
+> - Scientific documentation renamed `gSOMOs.pdf`. And content updated
 > - gSOMOs-v3.pdf scientific document now downloadable in `gsomos.readthedocs.io`
+> - Images in README.md now point to their `https://raw.githubusercontent.com` counterpart
 >
 > **Added**
 >
+> - new analyzis scheme in `proj.py`: bases on the diagonalization of projection matrices
+> - new `clean_logfile_name()` function in `io.py` (made to solve a prefix issue for X.log.gz files)
 > - Short examples in the documentation
 > - docstring for `projection_heatmap_from_df`
 > - docstring of `show_alpha_to_homo` translated in English
@@ -18,20 +26,6 @@
 > 
 > - minor fixes
 > 
-> **Version [0.9.0] - 2024-04-26**
-> 
-> **Changed**
-> 
-> - logo is now gSOMOs instead of SOMOs
-> - in the projection scheme (`proj.py`), there are now two criteria to identify a SOMO, namely "SOMO P2v?" (formerly SOMO?) and "SOMO dom. β MO?" (see scientific documentation)
->     - SOMOs identified according to the P^2_virtual criterion are highlighted in green
->     - SOMOs identified only on the basis of a dominant virtual beta MO are highlighted in orange (weaker criterion)
-> - Scientific documentation renamed `gSOMOs.pdf`. And content updated
-> 
-> **Added**
-> 
-> - new analyzis scheme in `proj.py`: bases on the diagonalization of projection matrices
-> - new `clean_logfile_name()` function in `io.py` (made to solve a prefix issue for X.log.gz files)
 
 # SOMOs
 
@@ -84,7 +78,7 @@ pip install SOMOs
 - Interactive or static heatmaps of MO similarities
 
 <div style="text-align: center;">
-  <img src="doc-latex/H2CO_T1_projection_heatmap-C.png" alt="heatmap" width="600px">
+  <img src="https://raw.githubusercontent.com/rpoteau/gSOMOs/main/doc-latex/H2CO_T1_projection_heatmap-C.png" alt="heatmap" width="600px">
 </div>
 
 #### t-SNE (Dimensionality Reduction)
@@ -92,7 +86,7 @@ pip install SOMOs
 - Enables inspection of orbital families and similarity patterns
 
 <div style="text-align: center;">
-  <img src="doc-latex/H2CO_T1_tSNE-C.png" alt="tSNE" width="600px">
+  <img src="https://raw.githubusercontent.com/rpoteau/gSOMOs/main/doc-latex/H2CO_T1_tSNE-C.png" alt="tSNE" width="600px">
 </div>
 
 ---
@@ -141,7 +135,7 @@ pip install SOMOs
 ---
 
 ### ✅ Examples Used in Notebooks (compressed Gaussian files)
-- `H2CO_T1_g09_wOverlaps.log.gz`
+- `H2CO_T1.log.gz`
 - `FeComplex.log.gz`
 
 <hr style="height:3px; background-color:#00aaaa; border:none;" />
