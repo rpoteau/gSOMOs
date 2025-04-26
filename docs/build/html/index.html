@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SOMOs documentation &mdash; gSOMOs 0.9.0 documentation</title>
+  <title>SOMOs documentation &mdash; gSOMOs 0.9.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
@@ -14,14 +14,14 @@
     <link rel="canonical" href="https://tonuser.github.io/gSOMOs/index.html" />
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=39bb1c6d"></script>
+      <script src="_static/documentation_options.js?v=aa3b121e"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
       <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="📚 Dependencies" href="SOMOs_imports_summary.html" /> 
+    <link rel="next" title="📄 Scientific Documentation" href="SOMOs_SciDoc.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -45,8 +45,9 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="SOMOs_imports_summary.html">📚 Dependencies</a></li>
-<li class="toctree-l1"><a class="reference internal" href="SciDoc.html">📄 Scientific Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SOMOs_SciDoc.html">📄 Scientific Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SOMOs_examples.html">🧮 Main Commands for Using gSOMOs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SOMOs_dependencies.html">📚 Dependencies</a></li>
 </ul>
 
         </div>
@@ -436,7 +437,35 @@ dominant beta contributions, and diagnostic flags.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="somos.proj.projection_heatmap_from_df">
 <span class="sig-prename descclassname"><span class="pre">somos.proj.</span></span><span class="sig-name descname"><span class="pre">projection_heatmap_from_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbasis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logfolder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'./logs'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'logfile.log'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#somos.proj.projection_heatmap_from_df" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Generates an interactive heatmap visualization of the main projections
+between occupied/virtual alpha and beta molecular orbitals (MOs) from a Gaussian log file.</p>
+<p>This tool allows the user to dynamically select how many occupied and virtual MOs
+(both alpha and beta) to display. The heatmap shows the normalized projection
+weights between selected orbitals.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pandas.DataFrame</em>) – DataFrame containing the projection contributions from alpha to beta orbitals.
+Must contain at least “Alpha MO” and one “β orbitals &gt;” contribution column.</p></li>
+<li><p><strong>nbasis</strong> (<em>int</em>) – Number of basis functions (corresponds to the number of orbitals per spin).</p></li>
+<li><p><strong>logfolder</strong> (<em>str</em><em>, </em><em>optional</em>) – Folder where the Gaussian log file is located. Default is “./logs”.</p></li>
+<li><p><strong>logfile</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of the Gaussian log file to load orbital information from. Default is “logfile.log”.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>The function uses <cite>ipywidgets</cite> to create an interactive interface for tuning
+the number of occupied and virtual orbitals included.</p></li>
+<li><p>Red dashed lines separate occupied and virtual orbitals on the heatmap.</p></li>
+<li><p>Projection contributions are normalized by 100.</p></li>
+<li><p>Requires external functions like <cite>load_mos_from_cclib</cite> and <cite>parse_beta_contrib_string</cite>.</p></li>
+</ul>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">-</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">-</span></code></p>
+</div>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="somos.proj.show_alpha_to_homo">
@@ -471,8 +500,14 @@ allant de l’α 1 jusqu’à la HOMO, avec surlignage facultatif des SOMOs.</p>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="SOMOs_imports_summary.html">📚 Dependencies</a></li>
-<li class="toctree-l1"><a class="reference internal" href="SciDoc.html">📄 Scientific Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SOMOs_SciDoc.html">📄 Scientific Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SOMOs_examples.html">🧮 Main Commands for Using gSOMOs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="SOMOs_examples.html#load-gaussian-log-files">📂 Load Gaussian Log Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SOMOs_examples.html#analyze-cosine-similarity-between-orbitals">📈 Analyze Cosine Similarity Between Orbitals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SOMOs_examples.html#projection-analysis">📊 Projection Analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="SOMOs_dependencies.html">📚 Dependencies</a></li>
 </ul>
 </div>
 </section>
@@ -481,7 +516,7 @@ allant de l’α 1 jusqu’à la HOMO, avec surlignage facultatif des SOMOs.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="SOMOs_imports_summary.html" class="btn btn-neutral float-right" title="📚 Dependencies" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="SOMOs_SciDoc.html" class="btn btn-neutral float-right" title="📄 Scientific Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

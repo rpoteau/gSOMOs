@@ -555,6 +555,40 @@ def parse_beta_contrib_string(s):
     return result
 
 def projection_heatmap_from_df(df, nbasis, logfolder="./logs", logfile="logfile.log"):
+    """
+    Generates an interactive heatmap visualization of the main projections
+    between occupied/virtual alpha and beta molecular orbitals (MOs) from a Gaussian log file.
+
+    This tool allows the user to dynamically select how many occupied and virtual MOs
+    (both alpha and beta) to display. The heatmap shows the normalized projection
+    weights between selected orbitals.
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        DataFrame containing the projection contributions from alpha to beta orbitals.
+        Must contain at least "Alpha MO" and one "β orbitals >" contribution column.
+    nbasis : int
+        Number of basis functions (corresponds to the number of orbitals per spin).
+    logfolder : str, optional
+        Folder where the Gaussian log file is located. Default is "./logs".
+    logfile : str, optional
+        Name of the Gaussian log file to load orbital information from. Default is "logfile.log".
+
+    Notes
+    -----
+    - The function uses `ipywidgets` to create an interactive interface for tuning 
+      the number of occupied and virtual orbitals included.
+    - Red dashed lines separate occupied and virtual orbitals on the heatmap.
+    - Projection contributions are normalized by 100.
+    - Requires external functions like `load_mos_from_cclib` and `parse_beta_contrib_string`.
+
+    See Also
+    --------
+    - `cosim.analyzeSimilarity`: generates the DataFrame of projections.
+    - `proj.project_occupied_alpha_onto_beta`: projects alpha onto beta orbitals.
+
+    """
     from ipywidgets import interact, interactive_output, IntSlider, Button, HBox, Checkbox, Output, VBox
     from functools import partial
     from .io import load_mos_from_cclib

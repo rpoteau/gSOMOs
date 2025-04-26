@@ -33,6 +33,7 @@ Thumbs.db
 !*-C.png
 *.pdf
 !doc-latex/*.pdf
+!docs/source/_static/*.pdf
 
 # Swap and temporary
 *~

@@ -3,6 +3,7 @@
 <div style="text-align: center;">
   <img src="_static/pyPCBanner.svg" alt="gSOMOs Banner" width="800px">
 </div>
+<br>
 
 | Module | Type | Add to `pyproject.toml`? |
 |--------|------|---------------------------|

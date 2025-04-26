@@ -27,5 +27,6 @@ SOMOs documentation
    :maxdepth: 2
    :caption: Contents:
 
-   SOMOs_imports_summary.md
-   SciDoc.md
+   SOMOs_SciDoc.md
+   SOMOs_examples.md
+   SOMOs_dependencies.md

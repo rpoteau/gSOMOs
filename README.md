@@ -2,13 +2,19 @@
 <img src="./somos/config/svg/pyPCBanner.svg" alt="SOMOs" width="1000"/>
 </div>
 
-> Version [0.9.1] - 2024-04-26
+> **Version [0.9.1] & [0.9.2] - 2024-04-26**
 >
 > **Changed**
 >
 > - gSOMOs-v3.pdf scientific document now downloadable in `gsomos.readthedocs.io`
 >
-> Version [0.9.0] - 2024-04-26
+> **Added**
+>
+> - Short examples in the documentation
+> - docstring for `projection_heatmap_from_df`
+> - docstring for `show_alpha_to_homo` translated in English
+>
+> **Version [0.9.0] - 2024-04-26**
 > 
 > **Changed**
 > 
