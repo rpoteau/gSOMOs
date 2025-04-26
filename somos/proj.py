@@ -11,14 +11,15 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+#################################################################################################################
 # ### Projection
-# 
+#################################################################################################################
+
+
 # #### Main projection scheme
+#################################################################################################################
 
-
-# #### heatmaps
-
-def project_occupied_alpha_onto_beta(logfolder, logfile, threshold_beta=20):
+def project_occupied_alpha_onto_beta(logfolder, logfile, threshold_beta=15):
     """
     Projects each occupied alpha orbital onto the full set of beta orbitals (occupied + virtual)
     using the AO overlap matrix. Returns a summary DataFrame including projection norms,
@@ -31,7 +32,7 @@ def project_occupied_alpha_onto_beta(logfolder, logfile, threshold_beta=20):
     logfile : str
         Name of the Gaussian log file.
     threshold_beta : float, optional
-        Percentage threshold (default: 20) above which a beta orbital is considered significant in the projection.
+        Percentage threshold (default: 15%) above which a beta orbital is considered significant in the projection.
 
     Returns
     -------
@@ -40,37 +41,39 @@ def project_occupied_alpha_onto_beta(logfolder, logfile, threshold_beta=20):
         - 'Alpha OM': Index (1-based) of the alpha orbital
         - 'Occ α': Occupation of the alpha orbital (usually 'O')
         - 'Energy (Ha)': Energy of the alpha orbital
-        - 'Projection² on β_virtual': Squared norm of the projection onto the virtual beta space
-        - 'Projection² on β_occupied': Squared norm of the projection onto the occupied beta space
+        - 'P² on β_virt': Squared norm of the projection onto the virtual beta space
+        - 'P² on β_occ': Squared norm of the projection onto the occupied beta space
         - 'Dominant β MO': Index (1-based) of the beta orbital with the largest projection
         - 'Index4Jmol': Jmol-compatible index for the dominant beta orbital
         - 'Occ β': Occupation of the dominant beta orbital ('V' or 'O')
         - 'E (β, Ha)': Energy of the dominant beta orbital
-        - 'Top 1 contrib (%)': Percentage of the total projection norm carried by the most contributing beta orbital
-        - 'Top 2 contrib (%)': Cumulative contribution of the top 2 beta orbitals
-        - 'Top 3 contrib (%)': Cumulative contribution of the top 3 beta orbitals
-        - 'Dominance ratio': Largest single contribution / total projection
+        - 'Top 1 (%)': Percentage of the total projection norm carried by the most contributing beta orbital
+        - 'Top 2 (%)': Cumulative contribution of the top 2 beta orbitals
+        - 'Top 3 (%)': Cumulative contribution of the top 3 beta orbitals
         - 'Spread?': Flag indicating whether the projection is distributed ("Yes" if <60% dominance)
         - 'β orbitals >{threshold_beta}%': List of tuples [OM index (1-based), contribution (%)] for beta orbitals contributing >{threshold_beta value}%
-        - 'SOMO?': Yes if projection is dominant onto virtual space and small on occupied
-
+        - 'SOMO P2v?': Yes for occupied alpha MOs, if 'P² on β_virt' is dominant onto virtual space and small on occupied
+        - 'SOMO dom. β MO?': Yes for occupied alpha MOs, if the dominant MO is a virtual β MO
+        
     Notes
     -----
-    The squared projection of an occupied alpha orbital \( \phi^\alpha_i \) onto the full beta space is computed as:
+    The squared projection of an occupied alpha orbital :math:`\\phi^\\alpha_i` onto the full beta space is computed as:
 
-    \[
-    \mathbf{v}_i = \phi^\alpha_i \cdot S \cdot (\phi^\beta)^T
-    \]
+    .. math::
 
-    where \( S \) is the AO overlap matrix, and \( \phi^\beta \) is the matrix of beta MOs. The squared norm \( \|\mathbf{v}_i\|^2 \) represents the total overlap.
+    \\mathbf{v}_i = \\phi^\\alpha_i \\cdot S \\cdot (\\phi^\\beta)^T
 
-    Top-N contributions are computed by squaring the individual projections \( v_{ij} \), sorting them, and evaluating the cumulative contributions from the top 1, 2, or 3 beta orbitals. These are returned as "Top 1 contrib (%)", "Top 2 contrib (%)", and "Top 3 contrib (%)".
+    where :math:`S` is the AO overlap matrix, and :math:`\\phi^\\beta` is the matrix of beta MOs. The squared norm :math:`\\|\\mathbf{v}_i\\|^2` represents the total overlap.
+
+    Top-N contributions are computed by squaring the individual projections :math:`v_{ij}`, sorting them, and evaluating the cumulative contributions from the top 1, 2, or 3 beta orbitals. These are returned as "Top 1 (%)", "Top 2 (%)", and "Top 3 (%)".
 
     The column "β orbitals >{threshold_beta}%" lists all beta orbitals contributing more than the specified percentage to the squared projection norm, with both their index (1-based) and contribution in percent.
 
-    The flag "SOMO?" is set to "Yes" if the squared projection on the virtual beta subspace is greater than 0.5, and the projection on the occupied beta subspace is below 0.5.
+    The flag "SOMO P2v?" is set to "Yes" for occupied alpha MOs if the squared projection on the virtual beta subspace is >= 0.5, and the projection on the occupied beta subspace is strictly below 0.5.
 
-    The total number of beta orbitals \( N \) used in the projection is equal to the total number of molecular orbitals in the beta spin channel. The projection is performed over the complete beta space, regardless of occupation.
+    The flag "SOMO dom. β MO?" is a weaker criterion. It is set to "Yes" for occupied alpha MOs if the dominant MO is a virtual beta MO
+
+    The total number of beta orbitals :math:`N`  used in the projection is equal to the total number of molecular orbitals in the beta spin channel. The projection is performed over the complete beta space, regardless of occupation.
     """
 
     from openpyxl import Workbook
@@ -93,6 +96,7 @@ def project_occupied_alpha_onto_beta(logfolder, logfile, threshold_beta=20):
         logfile : str
             Name of the Gaussian log file used to generate the projection data.
         """
+        from .io import clean_logfile_name
         
         # Convert 'β orbitals >X%' column (last dynamic key) into a string
         beta_colname = [col for col in df_sorted.columns if col.startswith("β orbitals >")][0]
@@ -105,23 +109,30 @@ def project_occupied_alpha_onto_beta(logfolder, logfile, threshold_beta=20):
         ws = wb.active
         ws.title = "Alpha→Beta Projections"
     
-        yellow_fill = PatternFill(start_color="FFFF99", end_color="FFFF99", fill_type="solid")
+        green_fill = PatternFill(start_color="acffc8", end_color="acffc8", fill_type="solid")
+        orange_fill = PatternFill(start_color="ffb375", end_color="ffb375", fill_type="solid")
     
         for r_idx, row in enumerate(dataframe_to_rows(df_sorted, index=False, header=True), 1):
             ws.append(row)
             if r_idx == 1:
                 continue  # skip header
-            if r_idx > 1 and row[-1] == "Yes":  # la colonne "SOMO?" est en dernière position
+            if r_idx > 1 and row[-2] == "Yes":  # la colonne "SOMO P2v?" est en dernière position
                 for cell in ws[r_idx]:
-                    cell.fill = yellow_fill
+                    cell.fill = green_fill
+            if r_idx > 1 and row[-1] == "Yes" and row[-2] == "No":  # la colonne "SOMO dom. β MO?" est en dernière position
+                for cell in ws[r_idx]:
+                    cell.fill = orange_fill
     
-        output_path = Path(logfolder) / f"{Path(logfile).stem}_projection_sorted.xlsx"
+        prefix = clean_logfile_name(logfile)
+        output_path = Path(logfolder) / f"{prefix}_projection_sorted.xlsx"
         wb.save(output_path)
         print(f"✅ Saved to: {output_path}")
 
 
     alpha_df, beta_df, alpha_mat, beta_mat, nBasis, overlap_matrix, info = load_mos_from_cclib(logfolder, logfile)
-
+    homo_alpha = max(i for i, occ in enumerate(alpha_df["Occupation"]) if occ == "O")
+    homo_beta = max(i for i, occ in enumerate(beta_df["Occupation"]) if occ == "O")
+    
     t4p.centerTitle("Computes the squared projection of each occupied alpha orbital onto the subspaces spanned by both virtual and occupied beta orbitals")
 
     # alpha_occ_idx = [i for i, occ in enumerate(alpha_df["Occupation"]) if occ == 'O']
@@ -152,41 +163,55 @@ def project_occupied_alpha_onto_beta(logfolder, logfile, threshold_beta=20):
         rel_contrib = proj2_all / norm2_total if norm2_total > 0 else np.zeros_like(proj2_all)
         significant_idx = [(j + 1, round(float(val * 100), 1)) for j, val in enumerate(rel_contrib) if val > threshold_beta/100]
 
-        # is_somo = "Yes" if norm2_virt > 0.5 and norm2_occ < 0.5 else "No"
         occ_alpha = alpha_df.iloc[alpha_occ_idx[i]]["Occupation"]
-        is_somo = "Yes" if (occ_alpha == "O" and norm2_virt > 0.5 and norm2_occ < 0.5) else "No"
+        is_SOMO_dom_beta = "Yes" if (occ_alpha == "O" and dominant_idx > homo_beta) else "No"
+        is_somo_P2_virt = "Yes" if (occ_alpha == "O" and norm2_virt >= 0.5 and norm2_occ < 0.5) else "No"
 
         projection_data.append({
             "Alpha MO": alpha_occ_idx[i] + 1,
             "Occ α": alpha_df.iloc[alpha_occ_idx[i]]["Occupation"],
             "Energy (Ha)": alpha_df.iloc[alpha_occ_idx[i]]["Energy (Ha)"],
-            "Projection² on β_virtual": float(f"{norm2_virt:.3f}"),
-            "Projection² on β_occupied": float(f"{norm2_occ:.3f}"),
+            "P² on β_virt": float(f"{norm2_virt:.2f}"),
+            "P² on β_occ": float(f"{norm2_occ:.2f}"),
             "Dominant β MO": dominant_idx + 1,
             "Index4Jmol": dominant_idx + 1 + nBasis,
             "Occ β": beta_df.iloc[dominant_idx]["Occupation"],
             "E (β, Ha)": beta_df.iloc[dominant_idx]["Energy (Ha)"],
-            "Top 1 contrib (%)": float(f"{100 * top1 / norm2_total:.1f}" if norm2_total > 0 else 0),
-            "Top 2 contrib (%)": float(f"{100 * top2 / norm2_total:.1f}" if norm2_total > 0 else 0),
-            "Top 3 contrib (%)": float(f"{100 * top3 / norm2_total:.1f}" if norm2_total > 0 else 0),
-            "Dominance ratio": round(dominance_ratio, 3),
+            "Top 1 (%)": float(f"{100 * top1 / norm2_total:.1f}" if norm2_total > 0 else 0),
+            "Top 2 (%)": float(f"{100 * top2 / norm2_total:.1f}" if norm2_total > 0 else 0),
+            "Top 3 (%)": float(f"{100 * top3 / norm2_total:.1f}" if norm2_total > 0 else 0),
             "Spread?": "Yes" if spread_flag else "No",
             f"β orbitals >{threshold_beta}%": significant_idx,
-            "SOMO?": is_somo
+            "SOMO P2v?": is_somo_P2_virt,
+            "SOMO dom. β MO?": is_SOMO_dom_beta
         })
     df = pd.DataFrame(projection_data)
+    df = df.round({
+    "P² on β_virt": 2,
+    "P² on β_occ": 2,
+    "Top 1 (%)": 1,
+    "Top 2 (%)": 1,
+    "Top 3 (%)": 1,
+    "Dominance ratio": 2,
+    })
 
     def custom_sort_alpha_df(df):
         """
         Trie le DataFrame des projections alpha → beta selon :
         - d'abord les alpha virtuelles (Occ α == "V")
-        - ensuite les SOMOs (Occ α == "O" et SOMO? == "Yes")
+        - ensuite les SOMOs (Occ α == "O" et SOMO P2v? ou SOMO dom. β MO? == "Yes")
         - puis les autres alpha occupées
         Chaque bloc est trié en Alpha MO décroissant.
         """
         df_virtuals = df[df["Occ α"] == "V"].copy()
-        df_somos = df[(df["Occ α"] == "O") & (df["SOMO?"] == "Yes")].copy()
-        df_others = df[(df["Occ α"] == "O") & (df["SOMO?"] != "Yes")].copy()
+        df_somos = df[
+            (df["Occ α"] == "O") &
+            ((df["SOMO P2v?"] == "Yes") | (df["SOMO dom. β MO?"] == "Yes"))
+        ].copy()
+        df_others = df[
+            (df["Occ α"] == "O") &
+            ((df["SOMO P2v?"] != "Yes") & (df["SOMO dom. β MO?"] != "Yes"))
+        ].copy()
         
         df_virtuals = df_virtuals.sort_values(by="Alpha MO", ascending=False)
         df_somos = df_somos.sort_values(by="Alpha MO", ascending=False)
@@ -211,7 +236,8 @@ def show_alpha_to_homo(df_proj, logfolder, logfile, highlight_somo=True):
     logfile : str
         Nom du fichier log.
     highlight_somo : bool
-        Si True, surligne les lignes avec SOMO? == "Yes".
+        Si True, surligne en jaune les lignes avec SOMO P2v? == "Yes"
+                 surligne en orange les lignes avec SOMO P2v? == "No", mais SOMO dom. β MO? == "Yes"
 
     Retourne
     --------
@@ -229,227 +255,289 @@ def show_alpha_to_homo(df_proj, logfolder, logfile, highlight_somo=True):
         return filtered
 
     def somo_highlight(row):
-        return ['background-color: #ffff99' if row["SOMO?"] == "Yes" else '' for _ in row]
+        if row["Occ α"] == "O":
+            if row["SOMO P2v?"] == "Yes":
+                bgc = 'background-color: #acffc8'
+            elif row["SOMO P2v?"] == "No" and row["SOMO dom. β MO?"] == "Yes":
+                bgc = 'background-color: #ffb375'
+            else:
+                bgc=''
+        else:
+            bgc=''
+        return [bgc for _ in row]
 
     return filtered.style.apply(somo_highlight, axis=1)
 
-#=========================================================
-def compute_projection_matrix_and_eigenvalues(lMOs, cMOs, nbasis, overlap_matrix):
+# ### Compute projection matrix and analyze its enigenvalues and eigenvectors 
+#################################################################################################################
+
+def diagonalize_alpha_occ_to_beta_occ_and_virt_separately(logfolder, logfile, threshold=0.15):
     """
-    Computes the projection matrix P = A A^T where A = alpha · S · beta^T,
-    and returns its eigenvalues and eigenvectors.
-
-    Parameters
-    ----------
-    lMOs : np.ndarray 
-    cMOs : np.ndarray
-    nbasis : int
-        Number of basis functions.
-    overlap_matrix : np.ndarray
-        AO overlap matrix (shape: n_basis, n_basis).
-
-    Returns
-    -------
-    eigenvalues : np.ndarray
-        Eigenvalues of the projection matrix P.
-    eigenvectors : np.ndarray
-        Eigenvectors of the projection matrix P.
-    P : np.ndarray
-        The projection matrix.
-    """
-    alpha_df = lMOs[0]
-    beta_df = lMOs[1]
-    alpha_mat = cMOs[0]
-    beta_mat = cMOs[1]
-
-    alpha_occ_idx = [i for i, occ in enumerate(alpha_df["Occupation"]) if occ == "O"]
-    alpha_occ_mat = alpha_mat[alpha_occ_idx, :]
-
-    # A = <alpha_occ | beta> : (n_alpha_occ × n_beta)
-    A = alpha_occ_mat @ overlap_matrix @ beta_mat.T
-    
-    # P = A A† : (n_alpha_occ × n_alpha_occ)
-    P = A @ A.T
-    
-
-    # Diagonalize P
-    eigenvalues, eigenvectors = np.linalg.eigh(P)  # Use eigh since P is symmetric
-
-    return eigenvalues[::-1], eigenvectors[:, ::-1], P  # Return in descending order
-
-# Simulate a call with dummy values (the actual call should pass real data)
-# compute_projection_matrix_and_eigenvalues(alpha_df, beta_df, alpha_mat, beta_mat, nbasis, overlap_matrix)
-
-def compute_projection_matrix_and_eigenvalues(lMOs, cMOs, nbasis, overlap_matrix):
-    """
-    Computes the projection matrix P = A Aᵀ where A = alpha_occ · S · beta.T,
-    and returns its eigenvalues and eigenvectors.
-
-    Parameters
-    ----------
-    lMOs : tuple
-        Tuple containing two DataFrames: (alpha_df, beta_df), each with MO occupations and energies.
-    cMOs : tuple
-        Tuple of two np.ndarrays: (alpha_mat, beta_mat), each of shape (n_OMs, n_basis).
-        MOs are stored in rows (i.e., row i = MO_i).
-    nbasis : int
-        Number of basis functions.
-    overlap_matrix : np.ndarray
-        AO overlap matrix (shape: n_basis, n_basis).
-
-    Returns
-    -------
-    eigenvalues : np.ndarray
-        Eigenvalues of the projection matrix P.
-    eigenvectors : np.ndarray
-        Eigenvectors of the projection matrix P.
-    P : np.ndarray
-        The projection matrix P = A Aᵀ.
-    """
-    alpha_df, beta_df = lMOs
-    alpha_mat, beta_mat = cMOs
-
-    # Filter only occupied alpha orbitals
-    occ_alpha_idx = [i for i, occ in enumerate(alpha_df["Occupation"]) if occ == "O"]
-    alpha_occ = alpha_mat[occ_alpha_idx, :]  # (n_occ_alpha, n_basis)
-
-    # Compute A = alpha_occ · S · beta.T
-    A = alpha_occ @ overlap_matrix @ beta_mat.T  # (n_occ_alpha, n_beta)
-
-    # Compute P = A Aᵀ
-    P = A @ A.T  # (n_occ_alpha, n_occ_alpha)
-
-    # Diagonalize
-    eigenvalues, eigenvectors = np.linalg.eigh(P)
-
-    return eigenvalues, eigenvectors, P
-
-def compute_orbital_projections(lMOs, cMOs, overlap_matrix):
-    """
-    Computes how much each alpha orbital is represented in the beta orbital space
-    using the AO overlap matrix S.
-
-    Parameters
-    ----------
-    lMOs : tuple of DataFrames
-        Tuple (alpha_df, beta_df), each containing orbital metadata.
-    cMOs : tuple of np.ndarray
-        Tuple (alpha_mat, beta_mat), each of shape (n_orbs, n_basis), with rows as orbitals.
-    overlap_matrix : np.ndarray
-        AO overlap matrix, shape (n_basis, n_basis).
-
-    Returns
-    -------
-    pd.DataFrame
-        DataFrame with alpha orbital number, energy, occupation, and squared projection norm.
-    """
-    alpha_df, beta_df = lMOs
-    alpha_mat, beta_mat = cMOs
-
-    projections = []
-    for i, a in enumerate(alpha_mat):
-        # Project orbital a onto the beta space
-        A_i = a @ overlap_matrix @ beta_mat.T  # shape (n_beta,)
-        proj_norm2 = np.dot(A_i, A_i)          # scalar: ||Proj_beta(a)||²
-
-        projections.append({
-            "Alpha OM": i + 1,
-            "Energy (Ha)": alpha_df.iloc[i]["Energy (Ha)"],
-            "Occupation": alpha_df.iloc[i]["Occupation"],
-            "Projection²": proj_norm2
-        })
-
-    return pd.DataFrame(projections)
-
-def print_eigen_analysis(eigenvalues, threshold=0.8):
-    """
-    Prints and analyzes the eigenvalues of the projection matrix.
-
-    Parameters
-    ----------
-    eigenvalues : np.ndarray
-        Eigenvalues of the projection matrix (real and ≥ 0).
-    threshold : float
-        Eigenvalues below this threshold are considered "low" (possible SOMO signature).
-    """
-    print("=== Projection Matrix Eigenvalue Analysis ===")
-    print(f"Total eigenvalues: {len(eigenvalues)}")
-    print()
-
-    n_high = np.sum(eigenvalues > 0.95)
-    n_low = np.sum(eigenvalues < threshold)
-
-    for i, val in enumerate(sorted(eigenvalues, reverse=True)):
-        status = ""
-        if val > 0.95:
-            status = "✅ well projected"
-        elif val < threshold:
-            status = "⚠️ low projection (possible SOMO)"
-        else:
-            status = "↔️ intermediate"
-
-        print(f"Eigenvalue {i+1:2d}: {val:.3f} {status}")
-
-    print()
-    print(f"🔹 {n_high} strongly projected α-OMs")
-    print(f"🔸 {n_low} possibly unpaired α-OMs (SOMO candidates)")
-
-def identify_somos_from_projection(logfolder, logfile):
-    """
-    Identifies potential SOMOs by projecting occupied alpha orbitals onto the beta orbital space.
+    Projects occupied alpha orbitals separately onto beta occupied and beta virtual subspaces,
+    diagonalizes the two projection matrices, and analyzes dominant contributions.
 
     Parameters
     ----------
     logfolder : str
-        Path to the folder containing the Gaussian log file.
+        Folder containing the Gaussian log file.
     logfile : str
-        Name of the Gaussian .log file.
-
-    This function:
-    - Loads orbital data from the log file.
-    - Computes the projection matrix P = A Aᵀ where A = α_occ · S · βᵀ.
-    - Diagonalizes P and plots its eigenvalues.
-    - Flags alpha orbitals with eigenvalues > 0.5 that project mainly onto virtual beta orbitals.
+        Name of the Gaussian log file.
+    threshold : float
+        Minimum squared coefficient to consider a beta orbital as dominant (default: 0.15).
     """
+
+    from ipywidgets import HBox, Button
+    def identify_virtual_contributions_for_weakly_projected_vectors(
+        alpha_occ_mat, beta_virt_mat, overlap_matrix,
+        eigvals_occ, eigvecs_occ, beta_virt_idx,
+        threshold_occ=0.5, threshold_contrib=0.15
+    ):
+        """
+        For eigenvectors with weak projection onto beta occupied MOs, 
+        identifies dominant contributions onto beta virtual MOs.
+        """
+        print("\n=== Virtual contributions for weakly β occupied eigenvectors ===")
+        weak_indices = [i for i, val in enumerate(eigvals_occ) if val < threshold_occ]
+    
+        if not weak_indices:
+            print("No eigenvectors with weak β occupied projection found.")
+            return
+    
+        for i in weak_indices:
+            eigvec = eigvecs_occ[:, i]  # eigenvector i
+            combo_alpha = eigvec @ alpha_occ_mat  # Now it is a molecular orbital vector (in AO basis)
+            proj_virtual = combo_alpha @ overlap_matrix @ beta_virt_mat.T  # projection onto beta virtual MOs
+            proj2 = proj_virtual**2
+            dominant_virt = [(beta_virt_idx[j] + 1, f"{proj2[j]*100:.1f}%") for j in range(len(beta_virt_idx)) if proj2[j] > threshold_contrib]
+            dominant_virt.sort(key=lambda x: -float(x[1].rstrip('%')))
+    
+            print(f"Eigenvector {i+1}: {dominant_virt}")
+            
+    def identify_alpha_contributions_for_weakly_projected_vectors(eigvecs_occ, alpha_occ_idx, weak_indices, threshold_contrib=0.1):
+        """
+        For eigenvectors weakly projected onto β occupied MOs, 
+        identifies dominant alpha occupied contributions.
+    
+        Parameters
+        ----------
+        eigvecs_occ : np.ndarray
+            Eigenvectors from the diagonalization of α_occ → β_occ projection.
+        alpha_occ_idx : list
+            Indices of alpha occupied orbitals (0-based).
+        weak_indices : list of int
+            Indices of weakly projected eigenvectors.
+        threshold_contrib : float
+            Minimum contribution (squared coefficient) to report (default: 0.1).
+        """
+        print("\n=== Alpha occupied contributions for weakly β occupied eigenvectors ===")
+        if not weak_indices:
+            print("No weak eigenvectors to analyze.")
+            return
+    
+        for i in weak_indices:
+            vec = eigvecs_occ[:, i]
+            contrib = np.array([ (alpha_occ_idx[j]+1, coeff**2) for j, coeff in enumerate(vec) if coeff**2 > threshold_contrib ])
+            contrib = sorted(contrib, key=lambda x: -x[1])
+    
+            if contrib:
+                print(f"Eigenvector {i+1}: {[(idx, f'{val*100:.1f}%') for idx, val in contrib]}")
+                
+    def summarize_somo_candidates(eigvecs_occ, eigvals_occ, alpha_occ_idx,
+                                   alpha_occ_mat, beta_virt_mat, overlap_matrix, beta_virt_idx,
+                                   threshold_occ=0.5, threshold_contrib=0.15):
+        """
+        Summarizes for each weakly β occupied eigenvector:
+        - Its dominant α occupied MOs
+        - Its dominant β virtual MOs
+        """
+        print("\n=== Summary of SOMO candidates ===")
+        weak_indices = [i for i, val in enumerate(eigvals_occ) if val < threshold_occ]
+        if not weak_indices:
+            print("No weakly projected eigenvectors found.")
+            return
+
+        for count, i in enumerate(weak_indices, 1):
+            vec = eigvecs_occ[:, i]
+            alpha_contrib = [
+                (alpha_occ_idx[j] + 1, coeff**2)
+                for j, coeff in enumerate(vec) if coeff**2 > threshold_contrib
+            ]
+            alpha_contrib = sorted(alpha_contrib, key=lambda x: -x[1])
+
+            combo_alpha = vec @ alpha_occ_mat
+            proj_virtual = combo_alpha @ overlap_matrix @ beta_virt_mat.T
+            proj2_virtual = proj_virtual**2
+            beta_virt_contrib = [
+                (beta_virt_idx[j] + 1, proj2_virtual[j])
+                for j in range(len(beta_virt_idx)) if proj2_virtual[j] > threshold_contrib
+            ]
+            beta_virt_contrib = sorted(beta_virt_contrib, key=lambda x: -x[1])
+            
+            print(f"\n──────────── SOMO Candidate #{count} ────────────")
+            print(f"  α occupied contributions:")
+            for idx, val in alpha_contrib:
+                print(f"    • α {idx} ({val*100:.1f}%)")
+            print(f"  β virtual projections:")
+            for idx, val in beta_virt_contrib:
+                print(f"    • β {idx} ({val*100:.1f}%)")
+            
+    def show_dominant_alpha_to_beta_overlap(alpha_occ_mat, beta_occ_mat, overlap_matrix, alpha_occ_idx, beta_occ_idx, threshold=0.1):
+        """
+        Displays the dominant beta occupied orbital for each alpha occupied orbital based on the overlap.
+    
+        Parameters
+        ----------
+        alpha_occ_mat : np.ndarray
+            Matrix of occupied alpha orbitals (n_alpha_occ, n_basis).
+        beta_occ_mat : np.ndarray
+            Matrix of occupied beta orbitals (n_beta_occ, n_basis).
+        overlap_matrix : np.ndarray
+            AO overlap matrix (n_basis, n_basis).
+        alpha_occ_idx : list
+            Indices of occupied alpha orbitals (0-based).
+        beta_occ_idx : list
+            Indices of occupied beta orbitals (0-based).
+        threshold : float
+            Minimum squared overlap to display (default = 0.1).
+        """
+        A_occ = alpha_occ_mat @ overlap_matrix @ beta_occ_mat.T  # (n_alpha_occ, n_beta_occ)
+    
+        # print("=== Dominant β occupied orbital for each α occupied orbital ===\n")
+        # for i in range(A_occ.shape[0]):
+        #     overlaps = A_occ[i]**2  # Squared overlaps
+        #     max_idx = np.argmax(overlaps)
+        #     max_val = overlaps[max_idx]
+    
+        #     if max_val > threshold:
+        #         print(f"α {alpha_occ_idx[i]+1} → β {beta_occ_idx[max_idx]+1} with {max_val*100:.1f}% overlap")
+        #     else:
+        #         print(f"α {alpha_occ_idx[i]+1} → No significant overlap (> {threshold*100:.1f}%)")
+    
+        # print()
+
+
     from .io import load_mos_from_cclib
-    
+
     alpha_df, beta_df, alpha_mat, beta_mat, nBasis, overlap_matrix, info = load_mos_from_cclib(logfolder, logfile)
-    n_alpha_occ = (alpha_df["Occupation"] == "O").sum()
-    n_beta_occ = (beta_df["Occupation"] == "O").sum()
-    alpha_occ_idx = [i for i, occ in enumerate(alpha_df["Occupation"]) if occ == 'O']
+    
+    alpha_occ_idx = [i for i, occ in enumerate(alpha_df["Occupation"]) if occ == "O"]
+    beta_occ_idx = [i for i, occ in enumerate(beta_df["Occupation"]) if occ == "O"]
+    beta_virt_idx = [i for i, occ in enumerate(beta_df["Occupation"]) if occ == "V"]
+
     alpha_occ_mat = alpha_mat[alpha_occ_idx, :]
-    
-    print(f"n_basis = {nBasis}")
-    print(f"Occupied alpha MOs: {n_alpha_occ} (1 -> {n_alpha_occ})")
-    print(f"Occupied beta MOs : {n_beta_occ} ({nBasis+1} -> {nBasis+n_beta_occ+1})")
-    
-    listMOs = (alpha_df, beta_df)
-    coeffMOs = (alpha_mat, beta_mat)
-    
-    eigenvalues, eigenvectors, P = compute_projection_matrix_and_eigenvalues(listMOs, coeffMOs, nBasis, overlap_matrix)
-    eigenvalues = np.clip(eigenvalues, 0, 1)
+    beta_occ_mat = beta_mat[beta_occ_idx, :]
+    beta_virt_mat = beta_mat[beta_virt_idx, :]
 
+    # Projections
+    A_occ = alpha_occ_mat @ overlap_matrix @ beta_occ_mat.T
+    A_virt = alpha_occ_mat @ overlap_matrix @ beta_virt_mat.T
+
+    # Build projection matrices
+    P_occ = A_occ @ A_occ.T
+    P_virt = A_virt @ A_virt.T
+
+    # Diagonalize
+    eigvals_occ, eigvecs_occ = np.linalg.eigh(P_occ)
+    eigvals_virt, eigvecs_virt = np.linalg.eigh(P_virt)
+
+    idx_sort_occ = np.argsort(eigvals_occ)[::-1]
+    eigvals_occ = eigvals_occ[idx_sort_occ]
+    eigvecs_occ = eigvecs_occ[:, idx_sort_occ]
+
+    idx_sort_virt = np.argsort(eigvals_virt)[::-1]
+    eigvals_virt = eigvals_virt[idx_sort_virt]
+    eigvecs_virt = eigvecs_virt[:, idx_sort_virt]
+
+    # Plot eigenvalues
+    fig, axes = plt.subplots(1, 2, figsize=(14, 5))
+    for ax, eigvals, label in zip(axes, [eigvals_occ, eigvals_virt],
+                                  ["α occupied → β occupied", "α occupied → β virtual"]):
+        ax.plot(eigvals, marker="o")
+        ax.axhline(0.5, linestyle="--", color="red")
+        n_high = (eigvals >= 0.5).sum()
+        n_low = (eigvals < 0.5).sum()
+        ax.text(0.05, 0.85, f"≥0.5: {n_high}\n<0.5: {n_low}", transform=ax.transAxes, 
+                fontsize=10, bbox=dict(facecolor='white', edgecolor='black', boxstyle='round'))
+        ax.set_title(label)
+        ax.set_xlabel("Eigenvector index")
+        ax.set_ylabel("Eigenvalue")
+        ax.grid(True)
+
+    plt.tight_layout()
     
-    plt.figure(figsize=(8, 5))
-    plt.plot(eigenvalues, marker='o')
-    plt.xlabel("Orbital index")
-    plt.ylabel("Projection eigenvalue")
-    plt.title("Eigenvalues of α → β projection matrix")
-    plt.grid(True)
+    # Create Save Button
+    save_button = Button(description="💾 Save plot", tooltip="Save projection eigenvalues plot")
+    display(HBox([save_button]))
+
+    def on_save_button_clicked(_):
+        filename_prefix = clean_logfile_name(logfile)
+        save_path = Path(logfolder) / f"{filename_prefix}_ProjectionEigenvalues.png"
+        fig.savefig(save_path, dpi=300, transparent=True)
+        display(Markdown(f"✅ **Image saved as `{save_path}`**"))
+
+    save_button.on_click(on_save_button_clicked)
+
+
     plt.show()
-    
-    print(eigenvalues)
-    
-    A = alpha_occ_mat @ overlap_matrix @ beta_mat.T
-    dominant_beta_index = np.argmax(A**2, axis=1)  # ou abs si non-normalisé
-    for i, beta_idx in enumerate(dominant_beta_index):
-        if beta_df.iloc[beta_idx]["Occupation"] == 'V' and eigenvalues[i] > 0.5:
-            e_alpha = alpha_df.iloc[alpha_occ_idx[i]]["Energy (Ha)"]
-            e_beta = beta_df.iloc[beta_idx]["Energy (Ha)"]
-            print(f"🧲 OM alpha #{alpha_occ_idx[i]+1} (E={e_alpha:.3f} Ha) may be a SOMO — projects onto virtual beta #{beta_idx+1} (E={e_beta:.3f} Ha)")
 
+    # === Print dominant contributions separately ===
+    # print("=== Dominant contributions: α occupied → β occupied ===")
+    # for i in range(eigvecs_occ.shape[1]):
+    #     vec = eigvecs_occ[:, i]
+    #     combo_alpha = vec @ alpha_occ_mat  # (nbasis,)
+    #     proj = combo_alpha @ overlap_matrix @ beta_occ_mat.T  # (n_beta_occ,)
+    #     proj2 = proj**2
+    #     dominant = [(beta_occ_idx[j]+1, proj2[j]) for j in range(len(beta_occ_idx)) if proj2[j] > threshold]
+    #     dominant.sort(key=lambda x: -x[1])
+    #     if i == 0: print(vec)
+
+    #     print(f"Eigenvector {i+1}: {[(idx, f'{val*100:.1f}%') for idx, val in dominant]}")
+    # print()
+
+    # print("=== Dominant contributions: α occupied → β virtual ===")
+    # for i in range(eigvecs_virt.shape[1]):
+    #     vec = eigvecs_virt[:, i]
+    #     combo_alpha = vec @ alpha_occ_mat  # (nbasis,)
+    #     proj = combo_alpha @ overlap_matrix @ beta_virt_mat.T  # (n_beta_virt,)
+    #     proj2 = proj**2
+    #     dominant = [(beta_virt_idx[j]+1, proj2[j]) for j in range(len(beta_virt_idx)) if proj2[j] > threshold]
+    #     dominant.sort(key=lambda x: -x[1])
+    #     print(f"Eigenvector {i+1}: {[(idx, f'{val*100:.1f}%') for idx, val in dominant]}")
+    # print()
+    
+    # identify_virtual_contributions_for_weakly_projected_vectors(
+    #     alpha_occ_mat,
+    #     beta_virt_mat,
+    #     overlap_matrix,
+    #     eigvals_occ,
+    #     eigvecs_occ,
+    #     beta_virt_idx,
+    #     threshold_occ=0.5,
+    #     threshold_contrib=0.15
+    # )
+
+    # identify_alpha_contributions_for_weakly_projected_vectors(
+    #     eigvecs_occ,
+    #     alpha_occ_idx,
+    #     weak_indices=[i for i, val in enumerate(eigvals_occ) if val < 0.5],
+    #     threshold_contrib=0.1
+    # )
+
+    # Summarize SOMO candidates
+    summarize_somo_candidates(
+        eigvecs_occ,
+        eigvals_occ,
+        alpha_occ_idx,
+        alpha_occ_mat,
+        beta_virt_mat,
+        overlap_matrix,
+        beta_virt_idx,
+        threshold_occ=0.5,
+        threshold_contrib=0.15
+    )
 
 # #### Heatmap
+#################################################################################################################
 
 def parse_beta_contrib_string(s):
     if not isinstance(s, str) or not s.strip():
@@ -553,9 +641,10 @@ def projection_heatmap_from_df(df, nbasis, logfolder="./logs", logfile="logfile.
         plt.show()
 
     def save_heatmap(_):
+        from .io import clean_logfile_name
         fig = fig_container.get("fig")
         if fig is not None:
-            filename_prefix = Path(logfile).stem
+            filename_prefix = clean_logfile_name(logfile)
             save_path = Path(logfolder) / f"{filename_prefix}_projection_heatmap.png"
             fig.savefig(save_path, dpi=300, transparent=True)
             with output_msg:

@@ -2,15 +2,16 @@
 <img src="./somos/config/svg/pyPCBanner.svg" alt="SOMOs" width="1000"/>
 </div>
 
-> Version [0.2.6] - 2024-04-25
+> Version [0.9.0] - 2024-04-26
+> **Changed**
+> - logo is now gSOMOs instead of SOMOs
+> - in the projection scheme (`proj.py`), there are now two criteria to identify a SOMO, namely "SOMO P2v?" (formerly SOMO?) and "SOMO dom. β MO?" (see scientific documentation)
+>     - SOMOs identified according to the P^2_virtual criterion are highlighted in green
+>     - SOMOs identified only on the basis of a dominant virtual beta MO are highlighted in orange (weaker criterion)
+> - Scientific documentation renamed `gSOMOs.pdf`. And content updated
 > **Added**
-> - progession bar in `io.extract_gaussian_info`
-> - dependency on `tqdm` added in `pyproject.toml` and to `docs/source/SOMOs_imports_summary.md`
-> - in `index.rst`, new calls to
->     - SOMOs_imports_summary.md
->     - SciDoc.md
->  **Changed**
-> - sphinx documentation : link toward the scientific document now given in `SciDoc.md`
+> - new analyzis scheme in `proj.py`: bases on the diagonalization of projection matrices
+> - new `clean_logfile_name()` function in `io.py` (made to solve a prefix issue for X.log.gz files)
 
 # SOMOs
 

@@ -296,6 +296,7 @@ def analyzeSimilarity(logfolder, logfile):
         Alpha/beta DataFrames, coefficient matrices, nbasis, SOMO DataFrame, and overlap matrix.
     """
     from .io import load_mos_from_cclib
+    from .io import clean_logfile_name
     from openpyxl.styles import PatternFill
     from openpyxl.utils.dataframe import dataframe_to_rows
     from openpyxl import Workbook
@@ -323,7 +324,8 @@ def analyzeSimilarity(logfolder, logfile):
     display(similarity_df)
     pd.set_option('display.max_rows', 5)
 
-    output_path = Path(logfolder) / f"{Path(logfile).stem}_similarity.xlsx"
+    prefix = clean_logfile_name(logfile)
+    output_path = Path(logfolder) / f"{prefix}_similarity.xlsx"
     wb = Workbook()
     ws = wb.active
     ws.title = "Similarity Table"
@@ -374,6 +376,7 @@ def save_similarity_per_somo_from_df(df_SOMOs, lMOs, cMOs, nbasis, overlap_matri
     from openpyxl.styles import PatternFill
     from openpyxl.utils.dataframe import dataframe_to_rows
     from openpyxl import Workbook
+    from .io import clean_logfile_name
 
     alpha_df = lMOs[0]
     beta_df = lMOs[1]
@@ -382,7 +385,9 @@ def save_similarity_per_somo_from_df(df_SOMOs, lMOs, cMOs, nbasis, overlap_matri
 
     wb = Workbook()
     wb.remove(wb.active)
-    output_path = Path(logfolder) / f"{Path(logfile).stem}_similarityOfSOMOs.xlsx"
+
+    prefix = clean_logfile_name(logfile)
+    output_path = Path(logfolder) / f"{prefix}_similarityOfSOMOs.xlsx"
     yellow_fill = PatternFill(start_color="FFFF99", end_color="FFFF99", fill_type="solid")
 
     somo_alpha_indices = df_SOMOs["Alpha MO"].unique() - 1
@@ -587,9 +592,10 @@ def heatmap_MOs(lMOs, cMOs, nbasis, overlap_matrix, logfolder="./logs", logfilen
         plt.show()
 
     def save_heatmap(_):
+        from .io import clean_logfile_name
         fig = fig_container.get("fig")
         if fig is not None:
-            filename_prefix = Path(logfilename).stem
+            filename_prefix = clean_logfile_name(logfilename)
             save_path = Path(logfolder) / f"{filename_prefix}_heatmap.png"
             fig.savefig(save_path, dpi=300, transparent=True)
             with output_msg:
@@ -790,10 +796,11 @@ def tsne(lMOs, cMOs, overlap_matrix, logfolder="./logs", logfilename="logfile.lo
             fig.show()
 
         def save_tsne(_):
+            from .io import clean_logfile_name
             fig = fig_container.get("fig")
             output_msg.clear_output()
             if fig:
-                filename_prefix = Path(logfilename).stem
+                filename_prefix = clean_logfile_name(logfilename)
                 save_path = Path(logfolder) / f"{filename_prefix}_tSNE.png"
                 fig.write_image(str(save_path), scale=3)
                 with output_msg:

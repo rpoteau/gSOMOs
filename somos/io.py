@@ -213,3 +213,23 @@ def load_mos_from_cclib(logfolder, filename):
         })
         print("✅ Finished load_mos_from_cclib")
         return alpha_df, alpha_df, coeffs[0], coeffs[0], nbasis, overlap_matrix, info
+
+def clean_logfile_name(logfile):
+    """
+    Given a log file name (e.g., 'myfile.log' or 'myfile.log.gz'),
+    returns the base calculation name without any '.log' or '.log.gz' extension.
+
+    Parameters
+    ----------
+    logfile : str or Path
+        The name of the Gaussian log file.
+
+    Returns
+    -------
+    str
+        The cleaned calculation name, without the '.log' or '.log.gz' suffix.
+    """
+    name = Path(logfile).stem
+    if name.endswith(".log"):
+        name = name[:-4]
+    return name

@@ -6,10 +6,10 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'SOMOs'
+project = 'gSOMOs'
 copyright = '2025, Romuald Poteau'
 author = 'Romuald Poteau'
-release = '0.2.5'
+release = '0.9.0'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -40,4 +40,4 @@ extensions = [
 # -- doc sphinx ---------------------------------------------------------
 html_baseurl = "https://tonuser.github.io/gSOMOs/"
 extensions += ["sphinx.ext.githubpages"]
-
+html_extra_path = ['_static']

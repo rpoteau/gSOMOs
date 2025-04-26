@@ -7,7 +7,7 @@ SOMOs documentation
 ===================
 
 .. image:: _static/pyPCBanner.svg
-   :alt: SOMOs banner
+   :alt: gSOMOs banner
    :align: center
    :width: 1000px
 

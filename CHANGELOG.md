@@ -4,6 +4,19 @@ All notable changes to this gSOMOs project will be documented here.
 
 ---
 
+## [0.9.0] - 2024-04-26
+### Changed
+- logo is now gSOMOs instead of SOMOs
+- in the projection scheme (`proj.py`), there are now two criteria to identify a SOMO, namely "SOMO P2v?" (formerly SOMO?) and "SOMO dom. β MO?" (see scientific documentation)
+    - SOMOs identified according to the P^2_virtual criterion are highlighted in green
+    - SOMOs identified only on the basis of a dominant virtual beta MO are highlighted in orange (weaker criterion)
+- Scientific documentation renamed `gSOMOs.pdf`. And content updated
+### Added
+- new analyzis scheme in `proj.py`: bases on the diagonalization of projection matrices
+- new `clean_logfile_name()` function in `io.py` (made to solve a prefix issue for X.log.gz files)
+
+---
+
 ## [0.2.6] - 2024-04-25
 ### Added
 - progession bar in `io.extract_gaussian_info`
@@ -11,6 +24,7 @@ All notable changes to this gSOMOs project will be documented here.
 - in `index.rst`, new calls to
     - SOMOs_imports_summary.md
     - SciDoc.md
+- new `Cplx_1_OH442b_RC35_YC427_5.log.gz` example in `logs/`
 ### Changed
 - sphinx documentation : link toward the scientific document now given in `SciDoc.md`
 
