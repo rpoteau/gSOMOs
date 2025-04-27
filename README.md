@@ -2,7 +2,7 @@
 <img src="https://raw.githubusercontent.com/rpoteau/gSOMOs/main/somos/config/svg/pyPCBanner-C.png" alt="SOMOs" width="1000"/>
 </div>
 
-> **Versions [0.9.0] - [0.9.9] - 2024-04-27**
+> **Versions [0.9.0] - [1.0.0a] - 2024-04-27**
 >
 > **Changed**
 >
@@ -193,7 +193,7 @@ from somos import cosim, proj
 
 <hr style="height:3px; background-color:#00aaaa; border:none;" />
 
-## Examples and Documentation
+## 🧠 Examples and Documentation
 
 ### ✅ Examples Used in Notebooks (compressed Gaussian files)
 - `logs/H2CO_T1.log.gz`
@@ -203,9 +203,9 @@ from somos import cosim, proj
 
 ### 📓 Example Jupyter Notebook
 
-An example notebook demonstrating gSOMOs usage is available: [gSOMOs Examples Notebook on GitHub](https://github.com/rpoteau/gSOMOs/blob/main/SOMOs-examples.ipynb)  
+An example notebook demonstrating gSOMOs usage is available at: [gSOMOs Examples Notebook on GitHub](https://github.com/rpoteau/gSOMOs/blob/main/SOMOs-examples.ipynb). Save it in `my-project-folder`.
 
-Also download the [logs/ folder](https://github.com/rpoteau/gSOMOs/blob/main/logs.zip) with the two examples.
+Also download the [logs/ folder](https://github.com/rpoteau/gSOMOs/blob/main/logs.zip) with the two examples. Store it also in `my-project-folder`.
 
 ---
 

@@ -4,6 +4,12 @@ All notable changes to this gSOMOs project will be documented here.
 
 ---
 
+## [1.0.0a] - 2024-04-27
+### Fixed 
+- minor typos in `README.md`
+
+---
+
 ## [0.9.9] - 2024-04-27
 ### Changed 
 - updated *Installation* section in `README.md`

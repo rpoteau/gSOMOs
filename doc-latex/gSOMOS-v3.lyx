@@ -463,7 +463,7 @@ To differentiate between the contributions from occupied and virtual
 We then compute:
 \end_layout
 
-\begin_layout Standard
+\begin_layout Itemize
 \begin_inset Formula $\|\mathbf{v}_{i}^{\text{occ}}\|^{2}$
 \end_inset
 
@@ -478,7 +478,7 @@ We then compute:
  orbitals
 \end_layout
 
-\begin_layout Standard
+\begin_layout Itemize
 \begin_inset Formula $\|\mathbf{v}_{i}^{\text{virt}}\|^{2}$
 \end_inset
 
@@ -598,7 +598,11 @@ The
 \begin_inset Formula $j$
 \end_inset
 
- is the index (1-based) and 
+ is the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-MO index and 
 \begin_inset Formula $p_{j}$
 \end_inset
 
@@ -713,7 +717,7 @@ Diagonalization of the projection of
 \begin_inset Formula $\beta$
 \end_inset
 
- subspaces
+ sub-spaces
 \end_layout
 
 \begin_layout Standard
@@ -916,7 +920,7 @@ Thus,
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-\text{cosine similarity}(\phi_{i}^{\alpha},\phi_{j}^{\beta})=\frac{\boldsymbol{\Phi}_{i}^{\alpha T}\boldsymbol{S}\Phi_{j}^{\beta}}{\sqrt{\boldsymbol{\Phi}_{i}^{\alpha T}\boldsymbol{S}\boldsymbol{\Phi}_{i}^{\alpha}}\sqrt{\boldsymbol{\Phi}_{j}^{\beta T}\boldsymbol{S}\boldsymbol{\Phi}_{j}^{\beta}}}
+\text{cosine similarity}(\phi_{i}^{\alpha},\phi_{j}^{\beta})=\frac{\boldsymbol{\Phi}_{i}^{\alpha T}\boldsymbol{S}\boldsymbol{\Phi}_{j}^{\beta}}{\sqrt{\boldsymbol{\Phi}_{i}^{\alpha T}\boldsymbol{S}\boldsymbol{\Phi}_{i}^{\alpha}}\sqrt{\boldsymbol{\Phi}_{j}^{\beta T}\boldsymbol{S}\boldsymbol{\Phi}_{j}^{\beta}}}
 \end{equation}
 
 \end_inset
@@ -939,11 +943,6 @@ The similarity matrix constructed from these cosine similarities was then used t
  it is a classic method used to solve the assignment problem:
  given a cost matrix,
  it finds the optimal one-to-one assignment (or matching) that minimizes (or maximizes) the total cost (or similarity).
- It is provided by the 
-\family typewriter
-scipy.optimize.linear_sum_assignment
-\family default
- function.
  
 \end_layout
 
@@ -2390,7 +2389,7 @@ P²
 \end_layout
 
 \begin_layout Standard
-A heatmap can ne generated to visualize the main projection contributions of 
+A heatmap can be generated to visualize the main projection contributions of 
 \begin_inset Formula $\alpha$
 \end_inset
 
@@ -3540,7 +3539,7 @@ name "tab:SOMO-candidates-for-FeComplex"
 
 \end_inset
 
-SOMO candidates for the ircon complex,
+SOMO candidates for the iron complex,
  as given by the analyzis of the eigenvectors of 
 \begin_inset Formula $\boldsymbol{P}_{\text{occ}}$
 \end_inset
