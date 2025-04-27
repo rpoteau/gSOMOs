@@ -1,6 +1,6 @@
-# 🧪 How to Build the HTML Documentation for SOMOs (with Sphinx)
+# 🧪 How to Build and Publish the HTML Documentation for gSOMOs (with Sphinx + ReadTheDocs)
 
-This guide explains how to build a full HTML documentation for the SOMOs package using **Sphinx**.
+This guide explains how to build and publish full HTML documentation for the gSOMOs package using **Sphinx** and **ReadTheDocs**.
 
 ---
 
@@ -8,7 +8,6 @@ This guide explains how to build a full HTML documentation for the SOMOs package
 
 ```bash
 pip install sphinx sphinx_rtd_theme myst-parser numpydoc
-
 ```
 
 Optional:
@@ -18,17 +17,15 @@ pip install sphinx-autodoc-typehints
 
 ---
 
-## 🛠️ 2. Initialize the Sphinx project
-
-In the root folder of the project:
+## 🛠️ 2. Initialize the Sphinx Project (only needed once)
 
 ```bash
 sphinx-quickstart docs
 ```
 
-Answers:
+Answer:
 - Separate source and build dirs → yes
-- Project name → SOMOs
+- Project name → gSOMOs
 - Author name → Romuald Poteau
 - Use Makefile → yes
 
@@ -73,8 +70,13 @@ html_extra_path = ['_static']
 ## 🧱 4. Edit `docs/source/index.rst`
 
 ```rst
-Welcome to SOMOs's documentation!
-=================================
+Welcome to gSOMOs's documentation!
+===================================
+
+.. image:: _static/pyPCBanner.svg
+   :alt: gSOMOs Banner
+   :align: center
+   :width: 800px
 
 .. automodule:: somos.io
    :members:
@@ -87,11 +89,24 @@ Welcome to SOMOs's documentation!
 .. automodule:: somos.proj
    :members:
    :undoc-members:
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+   SOMOs_SciDoc.md
+   SOMOs_examples.md
+   SOMOs_dependencies.md
 ```
+
+✅ This structure:
+- Displays a large banner at the top.
+- Auto-documents all modules.
+- Organizes extra pages (scientific background, examples, dependencies).
 
 ---
 
-## 🚀 5. Build the documentation
+## 🚀 5. Build the Documentation Locally
 
 From the `docs/` directory:
 
@@ -99,13 +114,11 @@ From the `docs/` directory:
 make html
 ```
 
-Open the generated file:
+Then open:
 
 ```
 docs/build/html/index.html
 ```
-
-That's your full HTML documentation!
 
 ✅ You can check your site locally before publishing.
 
@@ -130,7 +143,7 @@ That's your full HTML documentation!
 - Documentation path: `docs/`
 - Configuration file: `docs/source/conf.py`
 
-✅ RTD will detect your `.readthedocs.yaml` (if any) or default settings.
+✅ RTD will detect your `readthedocs.yml` (if any) or default settings.
 
 ### 🔹 Step 4: Trigger First Build
 
@@ -152,6 +165,3 @@ You now have:
 - Automatic rebuild on every GitHub push 🚀
 
 ---
-
-
-

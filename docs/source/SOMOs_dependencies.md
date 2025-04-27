@@ -32,6 +32,7 @@
 | `openpyxl` | External | ✅ Yes |
 | `plotly` | External | ✅ Yes |
 | `tqdm` | External | ✅ Yes |
+| `jupyter` | External | ✅ Yes |
 | `tools4pyPC` | Local module | ❌ No |
 | `tools4AS` | Local module | ❌ No |
 | `visualID_Eng` | Local module | ❌ No |

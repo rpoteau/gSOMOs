@@ -1,6 +1,6 @@
-# 🧪 How to Build the HTML Documentation for SOMOs (with Sphinx)
+# 🧪 How to Build the HTML Documentation for gSOMOs (with Sphinx)
 
-This guide explains how to build a full HTML documentation for the SOMOs package using **Sphinx**.
+This guide explains how to build a full HTML documentation for the gSOMOs package using **Sphinx**.
 
 ---
 
@@ -8,7 +8,6 @@ This guide explains how to build a full HTML documentation for the SOMOs package
 
 ```bash
 pip install sphinx sphinx_rtd_theme myst-parser numpydoc
-
 ```
 
 Optional:
@@ -18,17 +17,15 @@ pip install sphinx-autodoc-typehints
 
 ---
 
-## 🛠️ 2. Initialize the Sphinx project
-
-In the root folder of the project:
+## 🛠️ 2. Initialize the Sphinx project (only needed once)
 
 ```bash
 sphinx-quickstart docs
 ```
 
-Answers:
+Answer:
 - Separate source and build dirs → yes
-- Project name → SOMOs
+- Project name → gSOMOs
 - Author name → Romuald Poteau
 - Use Makefile → yes
 
@@ -73,8 +70,8 @@ html_extra_path = ['_static']
 ## 🧱 4. Edit `docs/source/index.rst`
 
 ```rst
-Welcome to SOMOs's documentation!
-=================================
+Welcome to gSOMOs's documentation!
+===================================
 
 .. automodule:: somos.io
    :members:
@@ -107,51 +104,4 @@ docs/build/html/index.html
 
 That's your full HTML documentation!
 
-✅ You can check your site locally before publishing.
-
 ---
-
-## 🌍 6. Publish on ReadTheDocs
-
-### 🔹 Step 1: Create an Account on ReadTheDocs
-
-- Go to [https://readthedocs.org/](https://readthedocs.org/)
-- Sign up (you can use your GitHub account directly).
-
-### 🔹 Step 2: Connect Your GitHub Repository
-
-- Import a project.
-- Authorize ReadTheDocs to access your GitHub repositories.
-- Select `gSOMOs` from your repositories list.
-
-### 🔹 Step 3: Configure the Build
-
-- Branch: `main`
-- Documentation path: `docs/`
-- Configuration file: `docs/source/conf.py`
-
-✅ RTD will detect your `.readthedocs.yaml` (if any) or default settings.
-
-### 🔹 Step 4: Trigger First Build
-
-- Save the configuration.
-- ReadTheDocs will fetch your GitHub project, install dependencies, build HTML, and publish it.
-
-✅ Your doc will be available at:
-```
-https://gsomos.readthedocs.io/
-```
-
----
-
-# ✅ You are done!
-
-You now have:
-- A locally buildable documentation (`make html`)
-- A publicly accessible website (`https://gsomos.readthedocs.io/`)
-- Automatic rebuild on every GitHub push 🚀
-
----
-
-
-

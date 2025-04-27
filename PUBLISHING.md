@@ -250,3 +250,126 @@ from somos import io, cosim, proj
 
 Now modify any file in `somos/`, save it, and your notebook will reflect the change immediately!
 
+<hr style="height:3px; background-color:#00aaaa; border:none;" />
+
+# 📄 Managing `.gitignore` and `MANIFEST.in`
+
+When preparing your package for PyPI, you must control which files are:
+
+- Included inside your distribution archive (`.tar.gz`, `.whl`)
+- Ignored from Git versioning
+
+---
+
+## 🧹 `.gitignore`
+
+The `.gitignore` file tells Git **what NOT to track** in your repository.
+
+Typical entries:
+
+```bash
+# Python. Ignore temporary files and builds
+__pycache__/
+*.py[cod]
+*.so
+*.pyd
+*.egg-info/
+.eggs/
+build/
+!docs/build/
+dist/
+# *.log
+
+# Jupyter notebooks
+.ipynb_checkpoints/
+*.ipynb~
+
+# VSCode / IDEs
+.vscode/
+.idea/
+
+# Ignore sphinx / mkdocs builds
+_site/
+docs/_build/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Custom project
+*.xlsx
+*.png
+!*-C.png
+*.pdf
+!doc-latex/*.pdf
+!docs/source/_static/*.pdf
+
+# Swap and temporary
+*~
+*.swp
+*.swo
+
+
+```
+
+✅ It keeps your GitHub repo **clean and lightweight**.
+
+---
+
+## 📦 `MANIFEST.in`
+
+The `MANIFEST.in` file tells setuptools **what TO INCLUDE** in the distribution archive.
+
+Example:
+
+```bash
+include README.md
+include CHANGELOG.md
+include pyproject.toml
+include MANIFEST.in
+
+# Include everything inside docs and doc-latex
+recursive-include docs *
+recursive-include doc-latex *
+
+# Include all source code inside somos
+recursive-include somos *
+
+# Include example notebooks
+include *.ipynb
+
+# Include md files
+include *.md
+
+# Include log folder
+recursive-include logs *
+```
+
+✅ It ensures that:
+- Your code
+- Your documentation files (PDFs, banners, etc.)
+- Your `README.md`, `LICENSE`, and `pyproject.toml`
+  
+are all packed into your `.tar.gz` or `.whl` files.
+
+---
+
+## 🧠 Important
+
+- **Git and PyPI are independent**:  
+  What you push to GitHub (controlled by `.gitignore`) is not exactly what you upload to PyPI (controlled by `MANIFEST.in`).
+  
+- **You can ignore a file in Git but still include it in your PyPI package** (and vice-versa).
+
+- **Missing MANIFEST entries** will cause your PyPI package to lack essential files (like images, PDFs, etc.)
+
+---
+
+## ✅ Best practices for gSOMOs
+
+- Have a clean `.gitignore` excluding build artifacts
+- Explicitly include your important docs/assets in `MANIFEST.in`
+- Always rebuild (`python -m build`) and check the content of `dist/*.tar.gz` before uploading
+
+---
+

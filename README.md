@@ -1,5 +1,5 @@
 <div style="text-align:center">
-<img src="https://raw.githubusercontent.com/rpoteau/gSOMOs/main/somos/config/svg/pyPCBanner.png" alt="SOMOs" width="1000"/>
+<img src="https://raw.githubusercontent.com/rpoteau/gSOMOs/main/somos/config/svg/pyPCBanner-C.png" alt="SOMOs" width="1000"/>
 </div>
 
 > **Versions [0.9.0] - [0.9.4] - 2024-04-26**
@@ -13,6 +13,7 @@
 > - Scientific documentation renamed `gSOMOs.pdf`. And content updated
 > - gSOMOs-v3.pdf scientific document now downloadable in `gsomos.readthedocs.io`
 > - Images in README.md now point to their `https://raw.githubusercontent.com` counterpart
+> - Update of `DOCUMENTATION_setup.md` and of `PUBLISHING.md`
 >
 > **Added**
 >

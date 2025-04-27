@@ -9,7 +9,7 @@
 project = 'gSOMOs'
 copyright = '2025, Romuald Poteau'
 author = 'Romuald Poteau'
-release = '0.9.2'
+release = '0.9.5'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -38,6 +38,5 @@ extensions = [
 ]
 
 # -- doc sphinx ---------------------------------------------------------
-html_baseurl = "https://tonuser.github.io/gSOMOs/"
-extensions += ["sphinx.ext.githubpages"]
+html_baseurl = "https://gsomos.readthedocs.io/"
 html_extra_path = ['_static']

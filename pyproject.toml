@@ -1,22 +1,23 @@
 [project]
 name = "gSOMOs"
-version = "0.9.4"
+version = "0.9.5"
 description = "A Python package to analyze magnetic molecular orbitals (SOMOs) from Gaussian outputs"
 authors = [{name = "Romuald POTEAU, LPCNO", email = "romuald.poteau@univ-tlse3.fr"}]
 readme = "README.md"
 requires-python = ">=3.7"
 dependencies = [
+    "cclib",
     "numpy",
     "pandas",
     "matplotlib",
     "seaborn",
     "scipy",
     "scikit-learn",
-    "cclib",
     "ipywidgets",
     "openpyxl",
     "plotly",
-    "tqdm" 
+    "tqdm" ,
+    "jupyter"
 ]
 
 [build-system]
@@ -39,4 +40,5 @@ docs = [
   "myst-parser",
   "numpydoc"
 ]
+
 
