@@ -142,7 +142,9 @@ def end():
 # Optional automatic init if fully imported (not partial import)
 if __name__ == "somos.config.visualID_Eng":
     try:
-        init("./somos/config/")
+        # Get the real path of the installed module
+        pwy = os.path.dirname(__file__)
+        init(pwy)
     except Exception as e:
         print(f"[visualID_Eng] Could not auto-init: {e}")
 

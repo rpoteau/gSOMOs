@@ -6,7 +6,10 @@
 <br>
 
 This page summarizes the essential commands you need to use gSOMOs, along with a short explanation for each.
+
 Working examples are vailable in a [gSOMOs Examples Jupyter Notebook on GitHub](https://github.com/rpoteau/gSOMOs/blob/main/SOMOs-examples.ipynb)
+
+Also download a [log folder](https://github.com/rpoteau/gSOMOs/blob/main/logs.zip) with the two examples describied in the documentation.
 
 ---
 

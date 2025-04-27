@@ -2,7 +2,7 @@
 <img src="https://raw.githubusercontent.com/rpoteau/gSOMOs/main/somos/config/svg/pyPCBanner-C.png" alt="SOMOs" width="1000"/>
 </div>
 
-> **Versions [0.9.0] - [0.9.6] - 2024-04-27**
+> **Versions [0.9.0] - [0.9.7] - 2024-04-27**
 >
 > **Changed**
 >
@@ -14,6 +14,7 @@
 > - gSOMOs-v3.pdf scientific document now downloadable in `gsomos.readthedocs.io`
 > - Images in README.md now point to their `https://raw.githubusercontent.com` counterpart
 > - Update of `DOCUMENTATION_setup.md`, `PUBLISHING.md`
+> - Link toward the Jupyter notebook with examples and a log zip file with two Gaussian logs in `DOCUMENTATION_setup.md` and in `README.md`
 >
 > **Added**
 >
@@ -27,6 +28,7 @@
 > **Fixed**
 > 
 > - minor fixes
+> - wrong initialization of visualID_Eng at the beginning of the notebook
 > 
 
 # gSOMOs
@@ -148,7 +150,9 @@ from somos import cosim, proj
 
 ## 📓 Example Jupyter Notebook
 
-An example notebook demonstrating gSOMOs usage is available: [gSOMOs Examples Notebook on GitHub](https://github.com/rpoteau/gSOMOs/blob/main/SOMOs-examples.ipynb)
+An example notebook demonstrating gSOMOs usage is available: [gSOMOs Examples Notebook on GitHub](https://github.com/rpoteau/gSOMOs/blob/main/SOMOs-examples.ipynb)  
+
+Also download a [log folder](https://github.com/rpoteau/gSOMOs/blob/main/logs.zip) with the two examples describied in the documentation.
 
 
 <hr style="height:3px; background-color:#00aaaa; border:none;" />

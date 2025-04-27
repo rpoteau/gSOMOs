@@ -4,6 +4,18 @@ All notable changes to this gSOMOs project will be documented here.
 
 ---
 
+## [0.9.7] - 2024-04-27
+### Fixed
+- wrong initialization of visualID_Eng at the beginning of the notebook
+
+---
+
+## [0.9.6] - 2024-04-27
+### Changed
+- Link toward the Jupyter notebook with examples and a log zip file with two Gaussian logs in `DOCUMENTATION_setup.md` and in `README.md`
+
+---
+
 ## [0.9.5] - 2024-04-27
 ### Changed
 - Update of `DOCUMENTATION_setup.md` and of `PUBLISHING.md`
