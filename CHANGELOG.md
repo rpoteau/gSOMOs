@@ -4,6 +4,12 @@ All notable changes to this gSOMOs project will be documented here.
 
 ---
 
+## [0.9.9] - 2024-04-27
+### Changed 
+- updated *Installation* section in `README.md`
+
+---
+
 ## [0.9.8] - 2024-04-27
 ### Fixed
 - residual issues in `visualID_Eng.py`

@@ -2,7 +2,7 @@
 <img src="https://raw.githubusercontent.com/rpoteau/gSOMOs/main/somos/config/svg/pyPCBanner-C.png" alt="SOMOs" width="1000"/>
 </div>
 
-> **Versions [0.9.0] - [0.9.8] - 2024-04-27**
+> **Versions [0.9.0] - [0.9.9] - 2024-04-27**
 >
 > **Changed**
 >
@@ -23,6 +23,7 @@
 > - Short examples in the documentation
 > - docstring for `projection_heatmap_from_df`
 > - docstring of `show_alpha_to_homo` translated in English
+> - updated *Installation* section in `README.md`
 >
 > **Fixed**
 > 
@@ -45,15 +46,65 @@ A Python library to identify and analyze Single Occupied Molecular Orbitals (SOM
 
 <hr style="height:3px; background-color:#00aaaa; border:none;" />
 
-## Installation
+## 🛠️ Installation
 
-```bash
-pip install gSOMOs
-```
+### ⚡ Quickstart
+
+1. Open a terminal:
+
+- On Linux/macOS: open a Terminal (bash)
+
+- On Windows: open PowerShell 
+
+2. (Recommended) Set up a local virtual environment inside your project folder using [virtualenv](https://virtualenv.pypa.io/en/latest/installation.html).
+
+    ```bash
+    # Create, if necessary, a project folder
+    mkdir my-project-folder
+
+    # Move to your project directory
+    cd my-project-folder
+
+    # Create the virtual environment
+    virtualenv gSOMOS-venv # or any other name that has nothing to do with gSOMOS
+
+    # Activate the environment
+    source gSOMOS-venv/bin/activate   # On Linux/macOS
+    # or
+    gSOMOS-venv\Scripts\activate      # On Windows
+    ```
+
+3. Install gSOMOs inside the environment:
+
+    ```bash
+    pip install gSOMOs
+    ```
+
+📦 All necessary Python packages will be installed automatically !
+
+---
+
+### 📋 Requirements
+
+- 🐍 Python ≥ 3.8
+- 📦 A working installation of [virtualenv](https://virtualenv.pypa.io/en/latest/installation.html)
+- 🔄 An up-to-date version of `pip` (`python -m pip install --upgrade pip`)
+
+---
+
+### 📝 Notes
+
+- Keeping the virtual environment inside the project folder makes it easier to manage and remove if needed.
+- To deactivate the environment at any time, simply type:
+
+    ```bash
+    deactivate
+    ```
+
 
 <hr style="height:3px; background-color:#00aaaa; border:none;" />
 
-## Capabilities Overview
+## 🔎 Capabilities Overview
 
 `SOMOs` is a Python toolkit for analyzing **molecular orbitals** (MOs) from Gaussian log files, with a focus on identifying **SOMOs** (Singly Occupied Molecular Orbitals) in open-shell systems.
 
@@ -62,6 +113,7 @@ pip install gSOMOs
 ### 🚀 Main Features
 
 ```python
+from somos import io # optional
 from somos import cosim, proj
 ```
 
@@ -139,30 +191,31 @@ from somos import cosim, proj
     • β 192 (26.7%)
 ```
 
----
-
-### ✅ Examples Used in Notebooks (compressed Gaussian files)
-- `H2CO_T1.log.gz`
-- `FeComplex.log.gz`
-
 <hr style="height:3px; background-color:#00aaaa; border:none;" />
 
-## 📓 Example Jupyter Notebook
+## Examples and Documentation
+
+### ✅ Examples Used in Notebooks (compressed Gaussian files)
+- `logs/H2CO_T1.log.gz`
+- `logs/FeComplex.log.gz`
+
+---
+
+### 📓 Example Jupyter Notebook
 
 An example notebook demonstrating gSOMOs usage is available: [gSOMOs Examples Notebook on GitHub](https://github.com/rpoteau/gSOMOs/blob/main/SOMOs-examples.ipynb)  
 
-Also download a [log folder](https://github.com/rpoteau/gSOMOs/blob/main/logs.zip) with the two examples describied in the documentation.
+Also download the [logs/ folder](https://github.com/rpoteau/gSOMOs/blob/main/logs.zip) with the two examples.
 
+---
 
-<hr style="height:3px; background-color:#00aaaa; border:none;" />
+### 📚 Technical and scientific documentation
 
-## Technical and scientific documentation
-
-This document describes two complementary methods to identify singly occupied molecular orbitals (SOMOs) in open-shell systems:
+This [document](https://github.com/rpoteau/gSOMOs/blob/main/doc-latex/gSOMOS-v3.pdf) describes two complementary methods to identify singly occupied molecular orbitals (SOMOs) in open-shell systems:
 - **Orbital projection analysis**, where occupied α orbitals are projected onto the β orbital basis using the AO overlap matrix;
 - **Cosine similarity mapping**, which computes the angular similarity between α and β orbitals and matches them using the Kuhn–Munkres (Hungarian) algorithm.
 
-Two examples based on the triplet state (T₁) of formaldehyde (H₂CO) and on the lowest quintet state of an iron complex are commented in this document.
+The two examples, which involve finding the SOMOs of the lowest triplet state (*T*<sub>1</sub>) of formaldehyde (H<sub>2</sub>CO) and the lowest quintet state of an iron complex, are discussed in this document.
 
 <hr style="height:3px; background-color:#00aaaa; border:none;" />
 
