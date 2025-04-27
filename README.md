@@ -2,7 +2,7 @@
 <img src="https://raw.githubusercontent.com/rpoteau/gSOMOs/main/somos/config/svg/pyPCBanner-C.png" alt="SOMOs" width="1000"/>
 </div>
 
-> **Versions [0.9.0] - [0.9.7] - 2024-04-27**
+> **Versions [0.9.0] - [0.9.8] - 2024-04-27**
 >
 > **Changed**
 >
@@ -23,12 +23,11 @@
 > - Short examples in the documentation
 > - docstring for `projection_heatmap_from_df`
 > - docstring of `show_alpha_to_homo` translated in English
-> - link toward a jupyter notebook example in README.md and in 
 >
 > **Fixed**
 > 
 > - minor fixes
-> - wrong initialization of visualID_Eng at the beginning of the notebook
+> - wrong initialization of `visualID_Eng` at the beginning of the notebook, and tricky issues
 > 
 
 # gSOMOs

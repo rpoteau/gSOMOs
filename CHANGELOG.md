@@ -4,9 +4,15 @@ All notable changes to this gSOMOs project will be documented here.
 
 ---
 
+## [0.9.8] - 2024-04-27
+### Fixed
+- residual issues in `visualID_Eng.py`
+
+---
+
 ## [0.9.7] - 2024-04-27
 ### Fixed
-- wrong initialization of visualID_Eng at the beginning of the notebook
+- wrong initialization of `visualID_Eng.py` at the beginning of the notebook
 
 ---
 
