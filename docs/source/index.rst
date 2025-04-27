@@ -11,6 +11,10 @@ SOMOs documentation
    :align: center
    :width: 1000px
 
+.. raw:: html
+
+    <br>
+
 .. automodule:: somos.io
    :members:
    :undoc-members:

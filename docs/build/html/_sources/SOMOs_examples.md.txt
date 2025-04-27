@@ -4,8 +4,9 @@
   <img src="_static/pyPCBanner.svg" alt="gSOMOs Banner" width="800px">
 </div>
 <br>
+
 This page summarizes the essential commands you need to use gSOMOs, along with a short explanation for each.
-Working examples are vailable in the `SOMOs-examples.ipynb` Jupyter Notebook
+Working examples are vailable in a [gSOMOs Examples Jupyter Notebook on GitHub](https://github.com/rpoteau/gSOMOs/blob/main/SOMOs-examples.ipynb)
 
 ---
 

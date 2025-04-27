@@ -2,7 +2,7 @@
 <img src="https://raw.githubusercontent.com/rpoteau/gSOMOs/main/somos/config/svg/pyPCBanner-C.png" alt="SOMOs" width="1000"/>
 </div>
 
-> **Versions [0.9.0] - [0.9.4] - 2024-04-26**
+> **Versions [0.9.0] - [0.9.6] - 2024-04-27**
 >
 > **Changed**
 >
@@ -13,7 +13,7 @@
 > - Scientific documentation renamed `gSOMOs.pdf`. And content updated
 > - gSOMOs-v3.pdf scientific document now downloadable in `gsomos.readthedocs.io`
 > - Images in README.md now point to their `https://raw.githubusercontent.com` counterpart
-> - Update of `DOCUMENTATION_setup.md` and of `PUBLISHING.md`
+> - Update of `DOCUMENTATION_setup.md`, `PUBLISHING.md`
 >
 > **Added**
 >
@@ -22,13 +22,14 @@
 > - Short examples in the documentation
 > - docstring for `projection_heatmap_from_df`
 > - docstring of `show_alpha_to_homo` translated in English
+> - link toward a jupyter notebook example in README.md and in 
 >
 > **Fixed**
 > 
 > - minor fixes
 > 
 
-# SOMOs
+# gSOMOs
 
 🔗 Available on [PyPI](https://pypi.org/project/gSOMOs/)
 
@@ -46,7 +47,7 @@ A Python library to identify and analyze Single Occupied Molecular Orbitals (SOM
 ## Installation
 
 ```bash
-pip install SOMOs
+pip install gSOMOs
 ```
 
 <hr style="height:3px; background-color:#00aaaa; border:none;" />
@@ -58,6 +59,10 @@ pip install SOMOs
 ---
 
 ### 🚀 Main Features
+
+```python
+from somos import cosim, proj
+```
 
 #### Load Gaussian Log Files
 - Parses `.log` and `.log.gz` Gaussian output files
@@ -141,9 +146,10 @@ pip install SOMOs
 
 <hr style="height:3px; background-color:#00aaaa; border:none;" />
 
-## Examples
+## 📓 Example Jupyter Notebook
 
-see the `SOMOs-examples.ipynb` Jupyter notebook
+An example notebook demonstrating gSOMOs usage is available: [gSOMOs Examples Notebook on GitHub](https://github.com/rpoteau/gSOMOs/blob/main/SOMOs-examples.ipynb)
+
 
 <hr style="height:3px; background-color:#00aaaa; border:none;" />
 
