@@ -253,7 +253,7 @@ The two examples, which involve finding the SOMOs of the lowest triplet state (*
 
 - search for the **Anaconda Powershell Prompt** application in the search field:
 - execute it. You should see a terminal, with a `(base) PS C:\Users\<first-letters-of-your-username>>` prompt:
-    <div style="text-align:center"><img width="500px" src="https://raw.githubusercontent.com/rpoteau/gSOMOs/main/figs/Windows-AnacondaPowerShellPrompt.png"/></div>
+    <div style="text-align:center"><img width="500px" src="https://raw.githubusercontent.com/rpoteau/gSOMOs/main/figs/Windows-AnacondaPowerShellPrompt-C.png"/></div>
 
 ### Linux
 
@@ -266,7 +266,7 @@ The two examples, which involve finding the SOMOs of the lowest triplet state (*
     ```
 
     LThe prompt should now start with `(base)`:
-     <div style="text-align:center"><img width="600px" src="https://raw.githubusercontent.com/rpoteau/gSOMOs/main/figs/Linux-activationOfConda.png"/></div>
+     <div style="text-align:center"><img width="600px" src="https://raw.githubusercontent.com/rpoteau/gSOMOs/main/figs/Linux-activationOfConda-C.png"/></div>
 
 - to deactivate the "base" python environment of conda, type:</span>
 
