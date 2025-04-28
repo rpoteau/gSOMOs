@@ -2,7 +2,7 @@
 <img src="https://raw.githubusercontent.com/rpoteau/gSOMOs/main/somos/config/svg/pyPCBanner-C.png" alt="SOMOs" width="1000"/>
 </div>
 
-> **Versions [0.9.0] - [1.0.0] - 2024-04-28**
+> **Versions [0.9.0] - [1.0.1] - 2024-04-28**
 >
 > **Changed**
 >
@@ -15,6 +15,7 @@
 > - Images in README.md now point to their `https://raw.githubusercontent.com` counterpart
 > - Update of `DOCUMENTATION_setup.md`, `PUBLISHING.md`
 > - Link toward the Jupyter notebook with examples and a log zip file with two Gaussian logs in `DOCUMENTATION_setup.md` and in `README.md`
+> - SOMOs of the iron complex shown in `gSOMOS-v3.pdf`
 >
 > **Added**
 >
