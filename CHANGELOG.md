@@ -4,6 +4,12 @@ All notable changes to this gSOMOs project will be documented here.
 
 ---
 
+## [1.0.0b] - 2024-04-28
+### Added 
+- basic instructions to install miniconda, in `README.md`
+
+---
+
 ## [1.0.0a] - 2024-04-27
 ### Fixed 
 - minor typos in `README.md`

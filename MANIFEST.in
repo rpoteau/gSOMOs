@@ -6,6 +6,7 @@ include MANIFEST.in
 # Include everything inside docs and doc-latex
 recursive-include docs *
 recursive-include doc-latex *
+recursive-include figs *
 
 # Include all source code inside somos
 recursive-include somos *

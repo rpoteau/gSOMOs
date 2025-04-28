@@ -2,7 +2,7 @@
 <img src="https://raw.githubusercontent.com/rpoteau/gSOMOs/main/somos/config/svg/pyPCBanner-C.png" alt="SOMOs" width="1000"/>
 </div>
 
-> **Versions [0.9.0] - [1.0.0a] - 2024-04-27**
+> **Versions [0.9.0] - [1.0.0b] - 2024-04-28**
 >
 > **Changed**
 >
@@ -24,6 +24,7 @@
 > - docstring for `projection_heatmap_from_df`
 > - docstring of `show_alpha_to_homo` translated in English
 > - updated *Installation* section in `README.md`
+> - basic instructions to install miniconda, in `README.md`
 >
 > **Fixed**
 > 
@@ -86,7 +87,7 @@ A Python library to identify and analyze Single Occupied Molecular Orbitals (SOM
 
 ### 📋 Requirements
 
-- 🐍 Python ≥ 3.8
+- 🐍 Python ≥ 3.8 (Windows users: [miniconda](https://www.anaconda.com/docs/getting-started/miniconda/main) is recommended, see installation instructions at the end of this document)
 - 📦 A working installation of [virtualenv](https://virtualenv.pypa.io/en/latest/installation.html)
 - 🔄 An up-to-date version of `pip` (`python -m pip install --upgrade pip`)
 
@@ -216,6 +217,62 @@ This [document](https://github.com/rpoteau/gSOMOs/blob/main/doc-latex/gSOMOS-v3.
 - **Cosine similarity mapping**, which computes the angular similarity between α and β orbitals and matches them using the Kuhn–Munkres (Hungarian) algorithm.
 
 The two examples, which involve finding the SOMOs of the lowest triplet state (*T*<sub>1</sub>) of formaldehyde (H<sub>2</sub>CO) and the lowest quintet state of an iron complex, are discussed in this document.
+
+<hr style="height:3px; background-color:#00aaaa; border:none;" />
+
+# Installing `miniconda`
+
+## Download the installer
+
+- download the [installer for your OS](https://docs.anaconda.com/miniconda/) (Windows/macOS/linux)
+
+- execute it:
+    - **Windows**: go to the download directory, double click on the `Miniconda3-latest-Linux-x86_64.exe` icon
+    - **Linux**: open a terminal, `cd` to the download directory, type `bash Miniconda3-latest-Linux-x86_64.sh` 
+
+- during the installation process:
+    - validate the license agreement
+    - choose the installation folder - or accept the folder defined by default:
+        - **Windows**: `C:\Users\<first-letters-of-your-username>\miniconda3`
+        - **Linux** : `/home/<your-username>/miniconda3`)
+    - finalize the installation
+        - **Windows**: select the Advanced Configuration Options. Do not select the "*Add Miniconda3 to my PATH environment variable*" checkbox if you fear a conflict with another python distribution that would you have in your local account.
+
+        <div style="text-align:center"><img width="500px" src="https://raw.githubusercontent.com/rpoteau/gSOMOs/main/figs/Anaconda-Miniconda-AdvancedInstallation-C.png"/></div>
+
+        - **Linux**: you need to answer a question about the PYTHONPATH environment variable. Answer no if you fear a conflict with another python distribution that would you have in your local account.
+        
+        <div style="text-align:center"><img width="700px" src="https://raw.githubusercontent.com/rpoteau/gSOMOs/main/figs/Linux-endOfMinicondaInstall-C.png"/></div>
+
+**Whatever the OS of your computer is, you end up with a "base" python distribution, provided and manageable with conda. Given the PATH environment selection chosen during the installation, you might have to activate the python environment**
+
+## Activation of a conda environment
+
+
+### Windows
+
+- search for the **Anaconda Powershell Prompt** application in the search field:
+- execute it. You should see a terminal, with a `(base) PS C:\Users\<first-letters-of-your-username>>` prompt:
+    <div style="text-align:center"><img width="500px" src="https://raw.githubusercontent.com/rpoteau/gSOMOs/main/figs/Windows-AnacondaPowerShellPrompt.png"/></div>
+
+### Linux
+
+- open a terminal
+
+- type the command:
+
+    ```bash
+    eval "$(/home/<your-username>/miniconda3/bin/conda shell.bash hook)"
+    ```
+
+    LThe prompt should now start with `(base)`:
+     <div style="text-align:center"><img width="600px" src="https://raw.githubusercontent.com/rpoteau/gSOMOs/main/figs/Linux-activationOfConda.png"/></div>
+
+- to deactivate the "base" python environment of conda, type:</span>
+
+    ```bash
+    conda deactivate
+    ```
 
 <hr style="height:3px; background-color:#00aaaa; border:none;" />
 

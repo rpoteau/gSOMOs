@@ -1,6 +1,6 @@
 [project]
 name = "gSOMOs"
-version = "1.0.0a"
+version = "1.0.0b"
 description = "A Python package to analyze magnetic molecular orbitals (SOMOs) from Gaussian outputs"
 authors = [{name = "Romuald POTEAU, LPCNO", email = "romuald.poteau@univ-tlse3.fr"}]
 readme = "README.md"
