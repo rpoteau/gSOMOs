@@ -220,9 +220,9 @@ The two examples, which involve finding the SOMOs of the lowest triplet state (*
 
 <hr style="height:3px; background-color:#00aaaa; border:none;" />
 
-# Installing `miniconda`
+# 🛠️ Installing `miniconda`
 
-## Download the installer
+## ⬇️ Download the installer
 
 - download the [installer for your OS](https://docs.anaconda.com/miniconda/) (Windows/macOS/linux)
 
@@ -246,8 +246,7 @@ The two examples, which involve finding the SOMOs of the lowest triplet state (*
 
 **Whatever the OS of your computer is, you end up with a "base" python distribution, provided and manageable with conda. Given the PATH environment selection chosen during the installation, you might have to activate the python environment**
 
-## Activation of a conda environment
-
+## 🔄 Activation of a conda environment
 
 ### Windows
 
