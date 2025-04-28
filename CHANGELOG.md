@@ -4,6 +4,12 @@ All notable changes to this gSOMOs project will be documented here.
 
 ---
 
+## [1.0.0] - 2024-04-28
+### Added 
+- jMol index of beta virtual MOs in the output of `proj.summarize_somo_candidates()`
+
+---
+
 ## [1.0.0b] - 2024-04-28
 ### Added 
 - basic instructions to install miniconda, in `README.md`

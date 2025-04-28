@@ -342,7 +342,7 @@ def diagonalize_alpha_occ_to_beta_occ_and_virt_separately(logfolder, logfile, th
             if contrib:
                 print(f"Eigenvector {i+1}: {[(idx, f'{val*100:.1f}%') for idx, val in contrib]}")
                 
-    def summarize_somo_candidates(eigvecs_occ, eigvals_occ, alpha_occ_idx,
+    def summarize_somo_candidates(nbasis, eigvecs_occ, eigvals_occ, alpha_occ_idx,
                                    alpha_occ_mat, beta_virt_mat, overlap_matrix, beta_virt_idx,
                                    threshold_occ=0.5, threshold_contrib=0.15):
         """
@@ -379,7 +379,7 @@ def diagonalize_alpha_occ_to_beta_occ_and_virt_separately(logfolder, logfile, th
                 print(f"    • α {idx} ({val*100:.1f}%)")
             print(f"  β virtual projections:")
             for idx, val in beta_virt_contrib:
-                print(f"    • β {idx} ({val*100:.1f}%)")
+                print(f"    • β {idx} ({val*100:.1f}%) [jMol: {idx+nbasis}]")
             
     def show_dominant_alpha_to_beta_overlap(alpha_occ_mat, beta_occ_mat, overlap_matrix, alpha_occ_idx, beta_occ_idx, threshold=0.1):
         """
@@ -525,6 +525,7 @@ def diagonalize_alpha_occ_to_beta_occ_and_virt_separately(logfolder, logfile, th
 
     # Summarize SOMO candidates
     summarize_somo_candidates(
+        nBasis,
         eigvecs_occ,
         eigvals_occ,
         alpha_occ_idx,

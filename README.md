@@ -2,7 +2,7 @@
 <img src="https://raw.githubusercontent.com/rpoteau/gSOMOs/main/somos/config/svg/pyPCBanner-C.png" alt="SOMOs" width="1000"/>
 </div>
 
-> **Versions [0.9.0] - [1.0.0b] - 2024-04-28**
+> **Versions [0.9.0] - [1.0.0] - 2024-04-28**
 >
 > **Changed**
 >
@@ -19,12 +19,13 @@
 > **Added**
 >
 > - new analyzis scheme in `proj.py`: bases on the diagonalization of projection matrices
-> - new `clean_logfile_name()` function in `io.py` (made to solve a prefix issue for X.log.gz files)
+> - new `io.clean_logfile_name()` function (made to solve a prefix issue for X.log.gz files)
 > - Short examples in the documentation
 > - docstring for `projection_heatmap_from_df`
 > - docstring of `show_alpha_to_homo` translated in English
 > - updated *Installation* section in `README.md`
 > - basic instructions to install miniconda, in `README.md`
+> - jMol index of beta virtual MOs in the output of `proj.summarize_somo_candidates()`
 >
 > **Fixed**
 > 
@@ -36,7 +37,7 @@
 
 🔗 Available on [PyPI](https://pypi.org/project/gSOMOs/)
 
-A Python library to identify and analyze Single Occupied Molecular Orbitals (SOMOs) from Gaussian 09 or Gaussian 16 `.log` files.
+A Python library to identify and analyze Singly Occupied Molecular Orbitals (SOMOs) from Gaussian 09 or Gaussian 16 `.log` files.
 
 [![PyPI version](https://img.shields.io/pypi/v/gSOMOs.svg?color=blue)](https://pypi.org/project/gSOMOs/)
 [![Documentation Status](https://readthedocs.org/projects/gsomos/badge/?version=latest)](https://gsomos.readthedocs.io/en/latest/?badge=latest)
@@ -162,34 +163,15 @@ from somos import cosim, proj
 
 ──────────── SOMO Candidate #1 ────────────
   α occupied contributions:
-    • α 187 (44.2%)
-    • α 164 (27.3%)
+    • α 9 (99.5%)
   β virtual projections:
-    • β 194 (73.3%)
-    • β 196 (16.1%)
+    • β 9 (96.4%) [jMol: 55]
 
 ──────────── SOMO Candidate #2 ────────────
   α occupied contributions:
-    • α 169 (41.1%)
-    • α 186 (21.6%)
-    • α 165 (15.7%)
+    • α 8 (89.4%)
   β virtual projections:
-    • β 192 (53.1%)
-    • β 193 (26.9%)
-
-──────────── SOMO Candidate #3 ────────────
-  α occupied contributions:
-    • α 186 (30.0%)
-  β virtual projections:
-    • β 198 (73.0%)
-
-──────────── SOMO Candidate #4 ────────────
-  α occupied contributions:
-    • α 168 (51.8%)
-    • α 183 (16.3%)
-  β virtual projections:
-    • β 193 (41.6%)
-    • β 192 (26.7%)
+    • β 8 (98.4%) [jMol: 54]
 ```
 
 <hr style="height:3px; background-color:#00aaaa; border:none;" />
@@ -220,7 +202,7 @@ The two examples, which involve finding the SOMOs of the lowest triplet state (*
 
 <hr style="height:3px; background-color:#00aaaa; border:none;" />
 
-# 🛠️ Installing `miniconda`
+# 🛠️ Installing miniconda
 
 ## ⬇️ Download the installer
 
@@ -264,7 +246,7 @@ The two examples, which involve finding the SOMOs of the lowest triplet state (*
     eval "$(/home/<your-username>/miniconda3/bin/conda shell.bash hook)"
     ```
 
-    LThe prompt should now start with `(base)`:
+    The prompt should now start with `(base)`:
      <div style="text-align:center"><img width="600px" src="https://raw.githubusercontent.com/rpoteau/gSOMOs/main/figs/Linux-activationOfConda-C.png"/></div>
 
 - to deactivate the "base" python environment of conda, type:</span>
